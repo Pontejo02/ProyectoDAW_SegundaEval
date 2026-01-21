@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Juego</title>
+	<link rel="stylesheet" type="text/css" href="estilojuego.css">
+</head>
+<body>
+	<canvas id="juego"></canvas>
+	<script type="text/javascript">
+		const canvas =document.getElementById('juego');
+		const ctx= canvas.getContext('2d');
+
+		canvas.width=700;
+		canvas.height=500;
+
+		//funciones objetos
+
+		//variables de la pelota
+		const pel={
+			//posicion pelota inicial
+			x: canvas.width/2,
+		 	y: canvas.height -50,
+		 	//radiopelota
+			radius: 10,
+			//velocidades
+			vx: 3,
+			vy: 3
+		};
+
+		//variables de la barra
+		const bar={
+			//posicion de la barra
+			x: 200,
+			y: canvas.height -30,
+			//ancho y alto
+			ancho: 300,
+			alto: 10,
+			//velocidad barra
+			vx: 3
+		};
+
+		function pelota(){
+			ctx.beginPath();
+			ctx.arc(pel.x, pel.y, pel.radius, 0, Math.PI * 2);
+			ctx.fillStyle = "white";
+			ctx.fill();
+		};
+
+		function barra(){
+			ctx.fillRect(bar.x,bar.y,bar.ancho,bar.alto);
+			ctx.fillStyle = "white";
+		};
+
+
+
+		//dentro de esta funcion tendremos todas las funciones que necesitaremos para el juego
+		function pintar(){
+			//estos son los diferentes objetos que tendremos que pueden interactuar
+			pelota()
+			//bloques()
+			barra()
+
+			//otro tipo de funciones
+			//colision()
+			//desaparecerbloque()
+			//rebote()
+			//puntos()
+			//evento()
+			//movimientopelota()
+			//movimientobarra()
+
+			window.requestAnimationFrame(pintar);
+		};
+		pintar();
+	</script>
+</body>
+</html>

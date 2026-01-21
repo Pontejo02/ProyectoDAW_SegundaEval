@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+    <!-- Fuente de google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="comoJugar">
+        <img class="salir" id="cerrar" src="./media/x.png" alt="icono de x para salir">
+        <h2>CÓMO JUGAR</h2>
+        <p>- Controlas una barra o nave en la parte inferior de la pantalla.</p>
+        <p>- Tu objetivo es golpear una pelota para que rebote y rompa todos los ladrillos de la parte superior.</p>
+        <p>- Si la pelota cae por debajo de tu barra, pierdes una vida.</p>
+        <p>- A veces hay ladrillos que tienen comportamientos espaciales (mirar leyenda bloques).</p>
+        <p>- Pasas de nivel cuando eliminas todos los ladrillos.</p>
+    </div>
+
+<script type="module" src="./main.js"></script>
+
+    <p id="logo">WORLD BLOCKS</p>
+
+    <div class="menu">
+        <div id="usuario">
+            <canvas id="iconoUsuario" width="200" height="200"></canvas>
+            <script>
+                const canvas = document.getElementById("iconoUsuario");
+                const ctx = canvas.getContext("2d");
+                canvas.width = 200; canvas.height = 200; er = "none";
+                ctx.fillStyle = "#4c370f";
+                ctx.fillRect(80, 20, 40, 40);
+                ctx.fillRect(60, 70, 80, 80);
+            </script>
+            <p>Usuario invitado</p>
+        </div>
+        <a href="jugar.html" class="boton">Jugar</a>
+        <a href="carrusel.html" class="boton">Niveles</a>
+        <button id="instrucciones" class="boton">Instrucciones</button>
+        <div id="submenu">
+            <button id="btncomoJugar" class="boton">Cómo jugar</button>
+            <button id="leyendaBloques" class="boton">Leyenda bloques</button>
+        </div>
+    </div>
+
+    <!--Funcionamiento de instrucciones-->        
+    <script>
+        const btnInstrucciones = document.getElementById("instrucciones");
+        const btnsubmenu = document.getElementById("submenu");
+        const btncomoJugar = document.getElementById("btncomoJugar");
+        const comoJugar = document.getElementById("comoJugar");
+        const cerrar = document.getElementById("cerrar");
+        cerrar.addEventListener("click", ()=>{
+            comoJugar.style.display='none';
+        });
+        instrucciones.addEventListener("click", ()=>{
+            btnsubmenu.style.display='block';
+        });
+        btncomoJugar.addEventListener("click", ()=>{
+            comoJugar.style.display='block';
+        });
+    </script>
+    <footer> 
+        <div class="ticker"> WORLD BLOCKS es un juego basado en el Arkanoid tradicional, añadiéndole una temática geografica. Desarrolladores: Luken Álava y Blanca Beuste </div> 
+    </footer>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

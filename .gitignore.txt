@@ -1,0 +1,12 @@
+# No subir configuraciones locales
+.env
+
+# No subir bases de datos
+*.sql
+
+# No subir archivos temporales
+*.log
+
+# XAMPP / sistema
+.DS_Store
+Thumbs.db

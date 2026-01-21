@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'Doto-VariableFont_ROND,wght';
+    src: url('../fuentes/Doto-VariableFont_ROND,wght.ttf');
+}
+body{
+    font-family: 'Doto-VariableFont_ROND,wght', sans-serif;
+    background-color: #f6ffad;
+    color:#4c370f;
+}
+/* ✅ CARRUSEL */
+.niveles {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.carrusel-niveles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.lista-niveles {
+    width: 1000px;
+    height: 580px;
+    position: relative;
+    overflow: hidden;
+    /*border: 2px solid black;*/
+}
+
+.nivel {
+    position: absolute;
+    width: 75%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+
+/* Nivel activo */
+.nivel.activo {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: retroceso 0.3s ease;
+
+}
+
+/* Imagen de nivel */
+.nivel img {
+    width: 3000px;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 20px;
+    border: 3px solid #cfdc5d;
+}
+
+.nivel-1 img { max-width: 100%; }
+.nivel-2 img { max-width: 50%; }
+.nivel-3 img { max-width: 65%; }
+.nivel-4 img { max-width: 66%; }
+.nivel-5 img { max-width: 85%; }
+
+/* Nombre */
+.nombre {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 24px;
+    text-shadow: 2px 2px #000;
+}
+.puntos{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    /*border: 2px solid black;*/
+    /*background: red;*/
+}
+.punto {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4c370f;
+    cursor: pointer;
+}
+
+
+.punto.active {
+    background: #cfdc5d;
+}
+
+/* Animación “retroceso” */
+@keyframes retroceso {
+    0% { transform: translate(-50%, -50%) scale(0.9); }
+    50% { transform: translate(-50%, -50%) scale(0.95); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
