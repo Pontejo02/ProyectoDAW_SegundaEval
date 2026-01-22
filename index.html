@@ -22,6 +22,31 @@
         <p>- Pasas de nivel cuando eliminas todos los ladrillos.</p>
     </div>
 
+    <div  id="leyendaBloques"> 
+        <img class="salir" id="cerrarLeyenda" src="./media/x.png" alt="icono de x para salir">
+        <h2>POWER UPS</h2>
+        <div> 
+            <img src="./media/Europa2.png" alt="Bloque Europa">
+            <p>Otorga 1 vida extra.</p>
+        </div> 
+        <div> 
+            <img src="./media/Africa2.png" alt="Bloque África">
+            <p>Libera 10 pelotas muy rápidas.</p> 
+        </div> 
+        <div> 
+            <img src="./media/Asia2.png" alt="Bloque Asia"> 
+            <p>La pala devora una línea completa de bloques.</p> 
+        </div> 
+        <div> 
+            <img src="./media/America2.png" alt="Bloque América"> 
+            <p>Explosión que destruye los bloques adyacentes.</p> 
+        </div> 
+        <div> 
+            <img src="./media/Oceania2.png" alt="Bloque Oceanía"> 
+            <p>Pelotas que suben rápido y bajan lentamente.</p> 
+        </div> 
+    </div>
+
 <script type="module" src="./main.js"></script>
 
     <p id="logo">WORLD BLOCKS</p>
@@ -36,7 +61,7 @@
         <button id="instrucciones" class="boton">Instrucciones</button>
         <div id="submenu">
             <button id="btncomoJugar" class="boton">Cómo jugar</button>
-            <button id="leyendaBloques" class="boton">Leyenda bloques</button>
+            <button id="btnleyendaBloques" class="boton">Leyenda bloques</button>
         </div>
     </div>
 
@@ -47,8 +72,15 @@
         const btncomoJugar = document.getElementById("btncomoJugar");
         const comoJugar = document.getElementById("comoJugar");
         const cerrar = document.getElementById("cerrar");
+        const cerrarLeyenda = document.getElementById("cerrarLeyenda");
+        const leyendaBloques = document.getElementById("leyendaBloques");
+        const btnleyendaBloques = document.getElementById("btnleyendaBloques");
         cerrar.addEventListener("click", ()=>{
             comoJugar.style.display='none';
+            btnsubmenu.style.display='none';
+        });
+        cerrarLeyenda.addEventListener("click", ()=>{
+            leyendaBloques.style.display='none';
             btnsubmenu.style.display='none';
         });
         instrucciones.addEventListener("click", ()=>{
@@ -56,6 +88,9 @@
         });
         btncomoJugar.addEventListener("click", ()=>{
             comoJugar.style.display='block';
+        });
+        btnleyendaBloques.addEventListener("click", ()=>{
+            leyendaBloques.style.display='block';
         });
     </script>
     <footer> 
