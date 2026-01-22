@@ -28,15 +28,7 @@
 
     <div class="menu">
         <div id="usuario">
-            <canvas id="iconoUsuario" width="200" height="200"></canvas>
-            <script>
-                const canvas = document.getElementById("iconoUsuario");
-                const ctx = canvas.getContext("2d");
-                canvas.width = 200; canvas.height = 200; er = "none";
-                ctx.fillStyle = "#4c370f";
-                ctx.fillRect(80, 20, 40, 40);
-                ctx.fillRect(60, 70, 80, 80);
-            </script>
+            <img id="iconoUsuario" src="./media/usuarioMarron.png"></img>
             <p>Usuario invitado</p>
         </div>
         <a href="jugar.html" class="boton">Jugar</a>
@@ -57,6 +49,7 @@
         const cerrar = document.getElementById("cerrar");
         cerrar.addEventListener("click", ()=>{
             comoJugar.style.display='none';
+            btnsubmenu.style.display='none';
         });
         instrucciones.addEventListener("click", ()=>{
             btnsubmenu.style.display='block';

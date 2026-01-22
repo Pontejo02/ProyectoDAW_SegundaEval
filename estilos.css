@@ -29,14 +29,15 @@ p#logo {
     padding: 0%;
     margin: 40px;
 }
-canvas#iconoUsuario {
-    width: 200px;
-    height: 200px;
+img#iconoUsuario {
+    width: 100px;
+    height: auto;
     display: block;
     margin: 0%;
     padding: 0%;
     position: absolute;
     z-index: 0;
+    /*border: 2px solid black;*/
 }
 
 #usuario p {
@@ -45,6 +46,7 @@ canvas#iconoUsuario {
     padding-top: 150px;
     padding-left: 10px;
     padding-right: 10px;
+    /*border: 2px solid black;*/
 }
 div#usuario {
     display: flex;
