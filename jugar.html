@@ -6,9 +6,11 @@
 </head>
 <body>
 	<canvas id="juego"></canvas>
+	<img hidden id="bloques" src="./media/bricks.png"/>
 	<script type="text/javascript">
 		const canvas =document.getElementById('juego');
 		const ctx= canvas.getContext('2d');
+		const $bloques= document.querySelector('#bloques');
 
 		canvas.width=700;
 		canvas.height=500;
@@ -21,7 +23,7 @@
 			x: canvas.width/2,
 		 	y: canvas.height -50,
 		 	//radiopelota
-			radius: 10,
+			radius: 8,
 			//velocidades
 			vx: 3,
 			vy: 3
@@ -30,10 +32,10 @@
 		//variables de la barra
 		const bar={
 			//posicion de la barra
-			x: 200,
+			x: 275,
 			y: canvas.height -30,
 			//ancho y alto
-			ancho: 300,
+			ancho: 150,
 			alto: 10,
 			//velocidad barra
 			vx: 3
@@ -51,13 +53,69 @@
 			ctx.fillStyle = "white";
 		};
 
+		/* VARIABLES DE LOS LADRILLOS */
+		  const numeroLadrillosFilas = 6;
+		  const numeroLadrillosColumnas = 20;
+		  const anchoLadrillo = 31;
+		  const altoLadrillo = 20;
+		  const separacionLadrillos = 2;
+		  const separacionArriba = 50;
+		  const separacionIzquierda = 22;
+		  const ladrillos = [];
+
+		  const ESTADO_LADRILLO = {
+		    VIVO: 1,
+		    DESTRUIDO: 0
+		  }
+
+		  
+		  for (let c = 0; c < numeroLadrillosColumnas; c++) {
+		    ladrillos[c] = [] // inicializamos con un array vacio
+		    for (let r = 0; r < numeroLadrillosFilas; r++) {
+		      // calculamos la posicion del ladrillo en la pantalla
+		      const ladrilloX = c * (anchoLadrillo + separacionLadrillos) + separacionIzquierda
+		      const ladrilloY = r * (altoLadrillo + separacionLadrillos) + separacionArriba
+		      // Asignar un color aleatorio a cada ladrillo
+		      const random = Math.floor(Math.random() * 8)
+		      // Guardamos la información de cada ladrillo
+		      ladrillos[c][r] = {
+		        x: ladrilloX,
+		        y: ladrilloY,
+		        status: ESTADO_LADRILLO.VIVO,
+		        color: random
+		      }
+		    }
+		  }
+		function bloques() {
+		    for (let c = 0; c < numeroLadrillosColumnas; c++) {
+		      for (let r = 0; r < numeroLadrillosFilas; r++) {
+		        const ladrilloActual = ladrillos[c][r]
+		        if (ladrilloActual.status === ESTADO_LADRILLO.DESTRUIDO) continue;
+
+		        const clipX = ladrilloActual.color * 32
+
+		        ctx.drawImage(
+		          $bloques,
+		          clipX,
+		          0,
+		          anchoLadrillo, // 31
+		          altoLadrillo, // 14
+		          ladrilloActual.x,
+		          ladrilloActual.y,
+		          anchoLadrillo,
+		          altoLadrillo
+		        )
+		      }
+		    }
+		  }
+
 
 
 		//dentro de esta funcion tendremos todas las funciones que necesitaremos para el juego
 		function pintar(){
 			//estos son los diferentes objetos que tendremos que pueden interactuar
 			pelota()
-			//bloques()
+			bloques()
 			barra()
 
 			//otro tipo de funciones

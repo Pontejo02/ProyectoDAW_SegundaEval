@@ -85,7 +85,7 @@ div#usuario:hover {
     z-index: 2;
     padding: 80px;
     aspect-ratio: 1/1;
-    max-width: 350px;
+    max-width: 500px;
     align-content: center;
     display: none;
 }
