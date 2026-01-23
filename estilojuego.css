@@ -9,8 +9,42 @@ body {
 	height: 100vh;
 }
 canvas{
-	border: 2px solid #cfdc5d;
-	background-color: black;
+	border: 2px solid #4c370f;
+	background-color: #cfdc5d;
 	display: block;
 	margin:0 auto;
 }
+
+/*DISEÑO*/
+/*#btnModo{
+    display: flex;
+    margin-top: 0;
+    border: 2px solid black;
+}*/
+
+/* Botón Toggle (Estilo Bonito) */
+    /*.theme-switch {
+        width: 60px;
+        height: 30px;
+        background-color: var(--toggle-bg);
+        border-radius: 15px;
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .theme-switch-circle {
+        width: 26px;
+        height: 26px;
+        background-color: var(--circle-color);
+        border-radius: 50%;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        transition: transform 0.3s;
+    }*/
+
+    /* Cuando esté activo (dark mode) */
+    /*body.dark-mode .theme-switch-circle {
+        transform: translateX(30px);
+    }*/

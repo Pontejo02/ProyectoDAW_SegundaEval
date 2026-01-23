@@ -44,7 +44,7 @@
 		function pelota(){
 			ctx.beginPath();
 			ctx.arc(pel.x, pel.y, pel.radius, 0, Math.PI * 2);
-			ctx.fillStyle = "white";
+			ctx.fillStyle = "#4c370f";
 			ctx.fill();
 			ctx.closePath();
 		};
@@ -56,7 +56,7 @@
 
 		function barra(){
 			ctx.fillRect(bar.x,bar.y,bar.ancho,bar.alto);
-			ctx.fillStyle = "white";
+			ctx.fillStyle = "#4c370f";
 		};
 
 		/* VARIABLES DE LOS LADRILLOS */
@@ -139,6 +139,8 @@
 			window.requestAnimationFrame(pintar);
 		};
 		pintar();
+
+
 	</script>
 </body>
 </html>
