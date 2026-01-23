@@ -6,7 +6,7 @@
 </head>
 <body>
 	<canvas id="juego"></canvas>
-	<img hidden id="bloques" src="./media/bricks.png"/>
+	<img hidden id="bloques" src="./media/marron.jpeg"/>
 	<script type="text/javascript">
 		const canvas =document.getElementById('juego');
 		const ctx= canvas.getContext('2d');
@@ -61,12 +61,12 @@
 
 		/* VARIABLES DE LOS LADRILLOS */
 		  const numeroLadrillosFilas = 6;
-		  const numeroLadrillosColumnas = 20;
-		  const anchoLadrillo = 31;
+		  const numeroLadrillosColumnas = 24;
+		  const anchoLadrillo = 25;
 		  const altoLadrillo = 20;
 		  const separacionLadrillos = 2;
 		  const separacionArriba = 50;
-		  const separacionIzquierda = 22;
+		  const separacionIzquierda = 26;
 		  const ladrillos = [];
 
 		  const ESTADO_LADRILLO = {
@@ -104,8 +104,8 @@
 		          $bloques,
 		          clipX,
 		          0,
-		          anchoLadrillo, // 31
-		          altoLadrillo, // 14
+		          anchoLadrillo,
+		          altoLadrillo,
 		          ladrilloActual.x,
 		          ladrilloActual.y,
 		          anchoLadrillo,
