@@ -14,7 +14,7 @@
 
 		canvas.width=700;
 		canvas.height=500;
-
+		const inicioRandom= Math.random() * (10 - (-10)) + (-10);
 		//funciones objetos
 
 		//variables de la pelota
@@ -25,8 +25,8 @@
 		 	//radiopelota
 			radius: 8,
 			//velocidades
-			vx: 3,
-			vy: 3
+			vx: inicioRandom,
+			vy: -2
 		};
 
 		//variables de la barra
@@ -46,7 +46,13 @@
 			ctx.arc(pel.x, pel.y, pel.radius, 0, Math.PI * 2);
 			ctx.fillStyle = "white";
 			ctx.fill();
+			ctx.closePath();
 		};
+
+		function movimientoPelota(){
+			pel.x += pel.vx;
+			pel.y += pel.vy;
+		}
 
 		function barra(){
 			ctx.fillRect(bar.x,bar.y,bar.ancho,bar.alto);
@@ -109,14 +115,17 @@
 		    }
 		  }
 
-
+		  function limpiarPantalla() {
+		    ctx.clearRect(0, 0, canvas.width, canvas.height);
+		  }
 
 		//dentro de esta funcion tendremos todas las funciones que necesitaremos para el juego
 		function pintar(){
 			//estos son los diferentes objetos que tendremos que pueden interactuar
-			pelota()
-			bloques()
-			barra()
+			limpiarPantalla();
+			pelota();
+			bloques();
+			barra();
 
 			//otro tipo de funciones
 			//colision()
@@ -124,7 +133,7 @@
 			//rebote()
 			//puntos()
 			//evento()
-			//movimientopelota()
+			movimientoPelota();
 			//movimientobarra()
 
 			window.requestAnimationFrame(pintar);
