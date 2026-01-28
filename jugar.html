@@ -38,7 +38,7 @@
 			ancho: 150,
 			alto: 10,
 			//velocidad barra
-			vx: 3
+			vx: 1
 		};
 
 		function pelota(){
@@ -120,7 +120,13 @@
 		  }
 
 		  function movimientoBarra(){
-		  	bar.x += bar.vx;
+		  	document.addEventListener("keydown", (e) => {
+			  if (e.key === "ArrowRight") {
+			    bar.x += bar.vx;
+			  }else if (e.key === "ArrowLeft"){
+			  	bar.x -= bar.vx;
+			  }
+			});
 		  }
 
 		//dentro de esta funcion tendremos todas las funciones que necesitaremos para el juego
@@ -138,7 +144,7 @@
 			//puntos()
 			//evento()
 			movimientoPelota();
-			//movimientoBarra()
+			movimientoBarra()
 
 			window.requestAnimationFrame(pintar);
 		};
