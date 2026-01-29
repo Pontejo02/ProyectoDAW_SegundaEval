@@ -11,6 +11,7 @@
 		const canvas =document.getElementById('juego');
 		const ctx= canvas.getContext('2d');
 		const $bloques= document.querySelector('#bloques');
+		const rect =canvas.getBoundingClientRect();
 
 		canvas.width=700;
 		canvas.height=500;
@@ -38,7 +39,7 @@
 			ancho: 150,
 			alto: 10,
 			//velocidad barra
-			vx: 3
+			vx: 10
 		};
 
 		function pelota(){
@@ -137,7 +138,6 @@
 		    });
 
 		    document.addEventListener("mousemove", (e) => {
-			    console.log(e.clientX, e.clientY);
 			    bar.x = e.clientX-500;
 			});
 
@@ -150,8 +150,23 @@
 		}
 
 		function colision(){
-			
+			//colision con paredes
+			if (pel.x + pel.radius > canvas.width || pel.x - pel.radius < 0) {
+		        pel.vx *= -1;
+		    }else if (pel.y - pel.radius < 0){
+		    	pel.vy *= -1;
+		    }
+		    // Colisión con barra
+		    if (
+		        pel.x + pel.radius > bar.x &&
+		        pel.x - pel.radius < bar.x + bar.ancho &&
+		        pel.y + pel.radius > bar.y &&
+		        pel.y - pel.radius < bar.y + bar.alto
+		    ) {
+		        pel.vy = -Math.abs(pel.vy); // fuerza que rebote hacia arriba
+		    }
 		}
+
 		  
 
 		//dentro de esta funcion tendremos todas las funciones que necesitaremos para el juego
@@ -163,7 +178,7 @@
 			barra();
 
 			//otro tipo de funciones
-			//colision()
+			colision();
 			//desaparecerbloque()
 			//rebote()
 			//puntos()
