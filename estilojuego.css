@@ -17,21 +17,34 @@ canvas{
 
 .barraPuntuacion{
 	margin-bottom: 10px;
+	width: 700px;
 	height: 60px;
 	background-color: #4c370f;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
 }
 
 #btnAtras{
+	position: absolute;
+	color: #cfdc5d;
+	left: 15px;
 	width: 25px;
 	height: auto;
 	background: none;
 	font-size: 40px;
-	margin-left: 10px;
+	margin-left: 30px;
 	cursor: pointer;
 	transition: background 0.2s ease;
 }
 #btnAtras:hover{
-	background: #cfdc5d;
+	background: #f6ffad;
+}
+
+.barraPuntuacion p{
+	color: #cfdc5d;
+	font-family: Verdana, sans-serif;
 }
 
 
