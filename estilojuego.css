@@ -15,6 +15,14 @@ canvas{
 	margin:0 auto;
 }
 
+#btnAtras{
+	border: 2px solid;
+	color: #4c370f;
+	width: 50px;
+	height: auto;
+}
+
+
 /*DISEÑO*/
 /*#btnModo{
     display: flex;
