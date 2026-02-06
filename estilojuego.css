@@ -9,22 +9,25 @@ body {
 	height: 100vh;
 }
 canvas{
-	border: 2px solid #4c370f;
+	/*border: 2px solid #4c370f;*/
 	background-color: #cfdc5d;
 	display: block;
 	margin:0 auto;
 }
 
-#btnAtras{
-	position: absolute;
-	top: 20px;
-	left: 20px;
+.barraPuntuacion{
+	margin-bottom: 10px;
+	height: 60px;
+	background-color: #4c370f;
+}
 
+#btnAtras{
+	width: 25px;
+	height: auto;
 	background: none;
-	border: solid;
-	font-size: 50px;
+	font-size: 40px;
+	margin-left: 10px;
 	cursor: pointer;
-	padding: 8px 12px;
 	transition: background 0.2s ease;
 }
 #btnAtras:hover{
