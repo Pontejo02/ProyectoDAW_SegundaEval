@@ -45,8 +45,13 @@ canvas{
 .barraPuntuacion p{
 	color: #cfdc5d;
 	font-family: Verdana, sans-serif;
+	border:solid;
 }
 
+.barraPuntuacion img{
+	width: 16px;
+	border:solid;
+}
 
 /*DISEÑO*/
 /*#btnModo{
