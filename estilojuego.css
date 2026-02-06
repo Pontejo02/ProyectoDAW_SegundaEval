@@ -16,10 +16,19 @@ canvas{
 }
 
 #btnAtras{
-	border: 2px solid;
-	color: #4c370f;
-	width: 50px;
-	height: auto;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+
+	background: none;
+	border: solid;
+	font-size: 50px;
+	cursor: pointer;
+	padding: 8px 12px;
+	transition: background 0.2s ease;
+}
+#btnAtras:hover{
+	background: #cfdc5d;
 }
 
 
