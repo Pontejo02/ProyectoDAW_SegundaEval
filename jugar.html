@@ -10,9 +10,9 @@
 			<div id="btnAtras"><b>←</b></div>
 			<div class="vidas">
 				<p><b>VIDAS</b></p>
-				<img src="./media/corazon.png">
-				<img src="./media/corazon.png">
-				<img src="./media/corazon.png">
+				<img id="vida1" src="./media/corazon.png">
+				<img id="vida2" src="./media/corazon.png">
+				<img id="vida3" src="./media/corazon.png">
 			</div>
 			<div class="puntuacion">
 				<p><b>PUNTUACION</b></p>
@@ -28,6 +28,9 @@
 	<img hidden id="bloques" src="./media/marron.jpeg"/>
 	<script type="text/javascript">
 		const canvas =document.getElementById('juego');
+		const vida1 =document.getElementById('vida1');
+		const vida2 =document.getElementById('vida2');
+		const vida3 =document.getElementById('vida3');
 		const ctx= canvas.getContext('2d');
 		const $bloques= document.querySelector('#bloques');
 		const rect =canvas.getBoundingClientRect();
@@ -212,6 +215,26 @@
 
 		}
 
+
+		//vida
+		vidasTotales=3;
+		function restarVidas(){
+			if(pel.y + pel.radius > canvas.height){
+				vidasTotales--;
+				if (vidasTotales===2) {
+					vida3.style.visibility="hidden";
+				}else if (vidasTotales===1) {
+					vida2.style.visibility="hidden";
+				}else if (vidasTotales===0) {
+					vida1.style.visibility="hidden";
+				}
+				pel.y = canvas.height-100;
+        		pel.x = canvas.width / 2;
+        		pel.vx=0;
+        		pel.vy=0;
+			}
+		}
+
 		  
 
 		//dentro de esta funcion tendremos todas las funciones que necesitaremos para el juego
@@ -230,7 +253,7 @@
 			//evento()
 			movimientoPelota();
 			movimientoBarra();
-
+			restarVidas();
 			window.requestAnimationFrame(pintar);
 		};
 		pintar();
