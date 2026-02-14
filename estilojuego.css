@@ -26,7 +26,7 @@ canvas{
 	position: relative;
 }
 
-#btnAtras{
+/*#btnAtras{
 	position: absolute;
 	color: #cfdc5d;
 	left: 15px;
@@ -40,17 +40,47 @@ canvas{
 }
 #btnAtras:hover{
 	background: #f6ffad;
+}*/
+
+#btnAtras {
+	position: absolute;
+	left: 20px;
+	width: 45px;
+	height: 45px;
+	background-color: #cfdc5d;
+	color: #4c370f;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 40px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.15s ease;
+	box-shadow: 0 4px 0 #2e2107;
+	line-height: 1;
+}
+
+#btnAtras:hover {
+	transform: translateY(2px);
+	box-shadow: 0 2px 0 #2e2107;
+	background-color: #f6ffad;
 }
 
 .barraPuntuacion p{
 	color: #cfdc5d;
 	font-family: Verdana, sans-serif;
-	border:solid;
+	/*border:solid;*/
 }
 
+.puntuacionVida{
+	text-align: center;
+	/*border: solid 2px;*/
+	width: 200px;
+}
 .barraPuntuacion img{
 	width: 16px;
-	border:solid;
+	/*border:solid;*/
+	margin-bottom: 20px;
 }
 
 /*DISEÑO*/
