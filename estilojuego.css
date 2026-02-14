@@ -24,6 +24,8 @@ canvas{
     align-items: center;
     justify-content: center;
     position: relative;
+    padding-bottom: 3px;
+    padding-top: 3px;
 }
 
 #btnAtras {
