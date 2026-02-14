@@ -16,31 +16,15 @@ canvas{
 }
 
 .barraPuntuacion{
-	margin-bottom: 10px;
-	width: 700px;
-	height: 60px;
-	background-color: #4c370f;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
+    margin-bottom: 10px;
+    width: 700px;
+    height: 60px;
+    background-color: #4c370f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
-
-/*#btnAtras{
-	position: absolute;
-	color: #cfdc5d;
-	left: 15px;
-	width: 25px;
-	height: auto;
-	background: none;
-	font-size: 40px;
-	margin-left: 30px;
-	cursor: pointer;
-	transition: background 0.2s ease;
-}
-#btnAtras:hover{
-	background: #f6ffad;
-}*/
 
 #btnAtras {
 	position: absolute;
@@ -69,19 +53,48 @@ canvas{
 .barraPuntuacion p{
 	color: #cfdc5d;
 	font-family: Verdana, sans-serif;
-	/*border:solid;*/
 }
 
-.puntuacionVida{
-	text-align: center;
-	/*border: solid 2px;*/
-	width: 200px;
+.puntuacion{
+    text-align: center;
+    width: 200px;
+    position: relative;
+    right: 20px;
 }
 .barraPuntuacion img{
-	width: 16px;
-	/*border:solid;*/
+    width: 16px;
 	margin-bottom: 20px;
 }
+
+.tiempo {
+    position: absolute;
+    right: 20px;
+    text-align: center;
+    width: 200px;
+    color: #cfdc5d;
+    font-family: Verdana, sans-serif;
+}
+.reloj{
+	margin-bottom: 20px;
+}
+.vidas{
+	color: #cfdc5d;
+    font-family: Verdana, sans-serif;
+    position: relative;
+    right: 80px;
+
+}
+
+.puntos{
+	color: #cfdc5d;
+    font-family: Verdana, sans-serif;
+    margin-bottom: 20px;
+}
+
+
+
+
+
 
 /*DISEÑO*/
 /*#btnModo{
