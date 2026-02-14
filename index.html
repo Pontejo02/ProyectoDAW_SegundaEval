@@ -5,13 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="estilos.css">
+    <link rel="stylesheet" type="text/css" href="./css/formularios.css">
     <!-- Fuente de google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
 </head>
-<body>
 
+<body>
+<!--Que el raton tire cuadraditos detras suyo----------------------------------->
+<div id="efectoRaton"></div>
+<!--ventana oculta de clickar al usuario---------------------------------------->
+    <div id="introUsuario">
+        <img class="salir" id="cerrarUsuario" src="./media/x.png" alt="icono de x para salir">
+        <h2>ACCEDE A TU CUENTA</h2>
+        <form id="login" method="post" action="login.php"> 
+            <div class="campo"> 
+                <label for="usuario">Nombre de usuario</label> 
+                <input type="text" id="nomUsuario" name="nomUsuario" />
+<!--BLANCA VEN AQUIJJJJJJJ
+JJJJJJJJ
+JJJJJJJJJ
+JJJJJJJJJ
+JJJJJJJJ-->
+                <?php if (!$primera) { foreach ($errores as $error) { echo "<p class='error'>$error</p>"; } } ?>
+
+            </div> 
+            <div class="campo">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" />
+            </div>
+            <button class ="btnVentana" type="submit">Entrar</button>
+            <button class ="btnVentana" type="button">Regístrate</button>
+        </form>
+    </div>
+<!--ventana oculta de clickar Cómo Jugar---------------------------------------->
     <div id="comoJugar">
         <img class="salir" id="cerrar" src="./media/x.png" alt="icono de x para salir">
         <h2>CÓMO JUGAR</h2>
@@ -21,7 +49,7 @@
         <p>- A veces hay ladrillos que tienen comportamientos espaciales (mirar leyenda bloques).</p>
         <p>- Pasas de nivel cuando eliminas todos los ladrillos.</p>
     </div>
-
+<!--ventana oculta de clickar al usuario---------------------------------------->
     <div  id="leyendaBloques"> 
         <img class="salir" id="cerrarLeyenda" src="./media/x.png" alt="icono de x para salir">
         <h2>POWER UPS</h2>
@@ -46,9 +74,7 @@
             <p>Pelotas que suben rápido y bajan lentamente.</p> 
         </div> 
     </div>
-
-<script type="module" src="./main.js"></script>
-
+<!--Lo que se ve en la pag. principal--------------------------------------->
     <p id="logo">WORLD BLOCKS</p>
 
     <div class="menu">
@@ -64,17 +90,30 @@
             <button id="btnleyendaBloques" class="boton">Leyenda bloques</button>
         </div>
     </div>
-
-    <!--Funcionamiento de instrucciones-->        
+    <footer> 
+        <div class="ticker"> WORLD BLOCKS es un juego basado en el Arkanoid tradicional, añadiéndole una temática geografica. Desarrolladores: Luken Álava y Blanca Beuste </div> 
+    </footer>
+<!--final de lo que se ve---------------------------------------------------->
+<!--Funcionamiento de botones------------------------------------------------>        
     <script>
-        const btnInstrucciones = document.getElementById("instrucciones");
+        const btninstrucciones = document.getElementById("instrucciones");
         const btnsubmenu = document.getElementById("submenu");
+        const btnUsuario = document.getElementById("usuario");
+        const introUsuario = document.getElementById("introUsuario");
+        const cerrarUsuario = document.getElementById("cerrarUsuario");
         const btncomoJugar = document.getElementById("btncomoJugar");
         const comoJugar = document.getElementById("comoJugar");
         const cerrar = document.getElementById("cerrar");
         const cerrarLeyenda = document.getElementById("cerrarLeyenda");
         const leyendaBloques = document.getElementById("leyendaBloques");
         const btnleyendaBloques = document.getElementById("btnleyendaBloques");
+        
+        btnUsuario.addEventListener("click", ()=>{
+            introUsuario.style.display='block';
+        });
+        cerrarUsuario.addEventListener("click", ()=>{
+            introUsuario.style.display='none';
+        });
         cerrar.addEventListener("click", ()=>{
             comoJugar.style.display='none';
             btnsubmenu.style.display='none';
@@ -83,7 +122,7 @@
             leyendaBloques.style.display='none';
             btnsubmenu.style.display='none';
         });
-        instrucciones.addEventListener("click", ()=>{
+        btninstrucciones.addEventListener("click", ()=>{
             btnsubmenu.style.display='block';
         });
         btncomoJugar.addEventListener("click", ()=>{
@@ -94,10 +133,35 @@
             leyendaBloques.style.display='block';
             comoJugar.style.display='none';
         });
+<!--Efecto del raton------------------------------------------>
+const bg = document.getElementById("efectoRaton");
+let lastX = 0;
+let lastY = 0;
+let first = true;
+document.addEventListener("mousemove", (e) => {
+    // En el primer movimiento, colocamos el punto inicial 
+    if (first) { 
+        lastX = e.clientX; 
+        lastY = e.clientY; 
+        first = false; 
+        return; 
+    } 
+    const dx = Math.abs(e.clientX - lastX);
+    const dy = Math.abs(e.clientY - lastY);
+    // Si no se han recorrido al menos 10px, no hacemos nada 
+    if (dx + dy < 20) return;
+    // Actualizamos la posición del último cuadrado 
+    lastX = e.clientX;
+    lastY = e.clientY;
+    // Creamos el cuadrado
+    const square = document.createElement("div");
+    square.classList.add("square");
+    square.style.left = e.clientX + "px";
+    square.style.top = e.clientY + "px";
+    bg.appendChild(square);
+    setTimeout(() => square.remove(), 1000);
+});
     </script>
-    <footer> 
-        <div class="ticker"> WORLD BLOCKS es un juego basado en el Arkanoid tradicional, añadiéndole una temática geografica. Desarrolladores: Luken Álava y Blanca Beuste </div> 
-    </footer>
     <script type="module" src="./main.js"></script>
 </body>
 </html>

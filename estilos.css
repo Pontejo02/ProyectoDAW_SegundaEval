@@ -75,6 +75,21 @@ div#usuario:hover {
     justify-content:center;
     column-gap: 20px;
 }
+#introUsuario{
+    background-color: #cfdc5d;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    padding: 80px;
+    aspect-ratio: 1/1;
+    max-width: 350px;
+    text-align: center;
+    align-content: center;
+    aspect-ratio: 1/1;
+    display: none;
+}
 
 #comoJugar {
     background-color: #cfdc5d;
@@ -135,6 +150,22 @@ img.salir {
 
 .boton:hover {
     background-color: #cfdc5d;
+    transform: scale(1.05); }
+
+.btnVentana {
+    color: #4c370f;
+    background-color: #cfdc5d;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-size: 1rem;
+    border: #4c370f 1px solid;
+    border-radius: #4c370f 10px solid;
+    font-family: Verdana, sans-serif;
+    transition: 0.2s; 
+}
+
+.btnVentana:hover {
+    background-color: #f6ffad;
     transform: scale(1.05); }
 
 /* Para que funcione el footer deslizante*/
@@ -255,4 +286,30 @@ footer {
     0% { transform: translate(-50%, -50%) scale(0.9); }
     50% { transform: translate(-50%, -50%) scale(0.95); }
     100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/*Efecto del raton-------------------------------------*/
+#efectoRaton {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* no bloquea clics */
+    overflow: hidden;
+    z-index: -1; /* detrás de todo */
+}
+
+.square {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #4c370f; /* marrón */
+    animation: fadeOut 0.4s forwards;
+    animation-delay: 5s;
+}
+
+@keyframes fadeOut {
+    from { transform: scale(1); }
+    to { opacity: 0; transform: scale(2); }
 }
