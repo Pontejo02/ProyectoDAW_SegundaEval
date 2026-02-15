@@ -96,26 +96,71 @@ canvas{
 #hasPerdido {
     background-color: #cfdc5d;
     position: fixed;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    padding: 80px;
-    aspect-ratio: 1/1;
-    max-width: 350px;
-    align-content: center;
+    width: 80vw;         /* ocupa gran parte del ancho de la pantalla */
+    max-width: 800px;    /* máximo ancho */
+    padding: 40px 20px;
     display: none;
+    flex-direction: column;  /* apilar contenido verticalmente */
+    align-items: center;     /* centrar horizontal */
+    justify-content: center; /* centrar vertical dentro del cuadro */
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    text-align: center;
+    width: 800px;
+    height: 500px;
+}
+
+#hasPerdido h2 {
+    color: #4c370f;
+    font-family: Verdana, sans-serif;
+    font-size: 4rem;      /* título gigante */
+    margin-bottom: 50px;
 }
 
 img.salir {
     position: absolute;
     z-index: 3;
-    top: 30px;
-    right: 30px;
+    top: 20px;
+    right: 20px;
     cursor: pointer;
-    width: 20px;
-    height: auto;}
+    width: 30px;
+    height: auto;
+}
 
+#hasPerdido .botones {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#hasPerdido .botones button {
+    padding: 20px 0;
+    font-size: 2rem;
+    width: 100%;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-family: Verdana, sans-serif;
+    transition: transform 0.2s, background 0.2s;
+}
+
+#reiniciarBtn {
+    background: #f6ffad;
+    color: #4c370f;
+}
+
+#volverBtn {
+    background: #f6ffad;
+    color: #4c370f;
+}
+
+#hasPerdido .botones button:hover {
+    transform: scale(1.05);
+}
 
 
 

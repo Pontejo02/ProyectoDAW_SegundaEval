@@ -27,12 +27,11 @@
 	</div>
 	<div id="hasPerdido">
         <img class="salir" id="cerrar" src="./media/x.png" alt="icono de x para salir">
-        <h2>CÓMO JUGAR</h2>
-        <p>- Controlas una barra o nave en la parte inferior de la pantalla.</p>
-        <p>- Tu objetivo es golpear una pelota para que rebote y rompa todos los ladrillos de la parte superior.</p>
-        <p>- Si la pelota cae por debajo de tu barra, pierdes una vida.</p>
-        <p>- A veces hay ladrillos que tienen comportamientos espaciales (mirar leyenda bloques).</p>
-        <p>- Pasas de nivel cuando eliminas todos los ladrillos.</p>
+        <h2>¡HAS PERDIDO!</h2>
+        <div class="botones">
+	        <button id="reiniciarBtn">Reiniciar</button>
+	        <button id="volverBtn">Volver</button>
+	    </div>
     </div>
 	<img hidden id="bloques" src="./media/marron.jpeg"/>
 	<script type="text/javascript">
@@ -42,6 +41,8 @@
 		const vida3 =document.getElementById('vida3');
 		const hasPerdido =document.getElementById('hasPerdido');
 		const cerrar = document.getElementById("cerrar");
+		const reiniciar = document.getElementById("reiniciarBtn");
+		const volver = document.getElementById("volverBtn");
 		const ctx= canvas.getContext('2d');
 		const $bloques= document.querySelector('#bloques');
 		const rect =canvas.getBoundingClientRect();
@@ -49,6 +50,7 @@
 		canvas.width=700;
 		canvas.height=500;
 		let pelotaEnJuego = false;
+		let estasVivo=true;
 		let vidasTotales=3;
 		const inicioRandom= Math.random() * (10 - (-10)) + (-10);
 
@@ -244,6 +246,7 @@
 		        else if (vidasTotales === 1) vida2.style.display = "none";
 		        else if (vidasTotales === 0) {
 		        	vida1.style.display = "none";
+		        	estasVivo=false;
 		        	hasPerdido.style.display= "block";
 		        }
 
@@ -281,6 +284,28 @@
 		    pelotaEnJuego = true;
 		}
 
+		//function reiniciar partida
+		function reiniciarPartida(){
+			if (estasVivo===false) {
+				reiniciar.addEventListener("click", (e) => {
+				    vidasTotales=3;
+				    vida1.style.display = "inline";
+				    vida2.style.display = "inline";
+				    vida3.style.display = "inline";
+				    estasVivo=true;
+				    reiniciarPelota();
+
+				    for (let c = 0; c < numeroLadrillosColumnas; c++) {
+				        for (let r = 0; r < numeroLadrillosFilas; r++) {
+				            ladrillos[c][r].status = ESTADO_LADRILLO.VIVO;
+				        }
+				    }
+				    hasPerdido.style.display="none";
+				});
+			}
+			
+		}
+
 		  
 
 		//dentro de esta funcion tendremos todas las funciones que necesitaremos para el juego
@@ -300,6 +325,7 @@
 			movimientoPelota();
 			movimientoBarra();
 			restarVidas();
+			reiniciarPartida();
 			window.requestAnimationFrame(pintar);
 		};
 		pintar();
