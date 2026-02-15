@@ -35,8 +35,9 @@ CREATE TABLE puntuaciones (
     fecha DATETIME NOT NULL,
     puntuacion INT NOT NULL,
     idNiveles INT NOT NULL,
+    idUsuario INT NOT NULL,
     PRIMARY KEY (idPuntuacion),
-    FOREIGN KEY (idNiveles) 
+    FOREIGN KEY (idUsuario) 
         REFERENCES usuarios(idUsuario)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
