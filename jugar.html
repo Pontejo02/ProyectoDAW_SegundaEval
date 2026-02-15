@@ -33,6 +33,19 @@
 	        <button id="volverBtn">Volver</button>
 	    </div>
     </div>
+    <div id="hasGanado">
+        <img class="salir" id="cerrar2" src="./media/x.png" alt="icono de x para salir">
+        <h2>¡HAS GANADO!</h2>
+        <div class="estadisticas">
+	        <p>🧡 Vidas restantes: <span id="vidasFinal"></span></p>
+	        <p>⭐ Puntuación: <span id="puntosFinal"></span></p>
+	        <p>⏱ Tiempo: <span id="tiempoFinal"></span></p>
+	    </div>
+        <div class="botones">
+	        <button id="reiniciarBtnGanado">Reiniciar</button>
+	        <button id="volverBtnGanado">Volver</button>
+	    </div>
+    </div>
 	<img hidden id="bloques" src="./media/marron.jpeg"/>
 	<script type="text/javascript">
 		const canvas =document.getElementById('juego');
@@ -41,10 +54,17 @@
 		const vida3 =document.getElementById('vida3');
 		const hasPerdido =document.getElementById('hasPerdido');
 		const cerrar = document.getElementById("cerrar");
+		const cerrar2 = document.getElementById("cerrar2");
 		const reiniciar = document.getElementById("reiniciarBtn");
 		const volver = document.getElementById("volverBtn");
+		const reiniciarBtnGanado = document.getElementById("reiniciarBtnGanado");
+		const volverBtnGanado = document.getElementById("volverBtnGanado");
 		const puntos = document.getElementById("puntos");
 		const reloj = document.getElementById("reloj");
+		const hasGanado = document.getElementById("hasGanado");
+		const vidasFinal = document.getElementById("vidasFinal");
+		const puntosFinal = document.getElementById("puntosFinal");
+		const tiempoFinal = document.getElementById("tiempoFinal");
 		const ctx= canvas.getContext('2d');
 		const $bloques= document.querySelector('#bloques');
 		const rect =canvas.getBoundingClientRect();
@@ -61,6 +81,10 @@
 
 		cerrar.addEventListener("click", ()=>{
             hasPerdido.style.display='none';
+        });
+
+        cerrar2.addEventListener("click", ()=>{
+            hasGanado.style.display='none';
         });
 
 
@@ -299,29 +323,39 @@
 
 		//function reiniciar partida
 		function reiniciarPartida(){
-			if (estasVivo===false) {
-				reiniciar.addEventListener("click", (e) => {
-				    vidasTotales=3;
-				    vida1.style.display = "inline";
-				    vida2.style.display = "inline";
-				    vida3.style.display = "inline";
-				    estasVivo=true;
-				    puntos.textContent=0;
-				    cantidadPuntos=0;
-				    reiniciarPelota();
-				    reloj.textContent = "00:00";
-					detenerCronometro();
+			vidasTotales = 3;
+		    vida1.style.display = "inline";
+		    vida2.style.display = "inline";
+		    vida3.style.display = "inline";
 
-				    for (let c = 0; c < numeroLadrillosColumnas; c++) {
-				        for (let r = 0; r < numeroLadrillosFilas; r++) {
-				            ladrillos[c][r].status = ESTADO_LADRILLO.VIVO;
-				        }
-				    }
-				    hasPerdido.style.display="none";
-				});
-			}
+		    estasVivo = true;
+		    cantidadPuntos = 0;
+		    puntos.textContent = 0;
+
+		    reloj.textContent = "00:00";
+		    detenerCronometro();
+
+		    // Resetear ladrillos
+		    for (let c = 0; c < numeroLadrillosColumnas; c++) {
+		        for (let r = 0; r < numeroLadrillosFilas; r++) {
+		            ladrillos[c][r].status = ESTADO_LADRILLO.VIVO;
+		        }
+		    }
+
+		    pel.vx = 0;
+		    pel.vy = 0;
+		    pel.x = canvas.width / 2;
+		    pel.y = canvas.height - 50;
+		    pelotaEnJuego = false;
+
+		    hasPerdido.style.display = "none";
+		    hasGanado.style.display = "none";
 			
 		}
+
+		reiniciar.addEventListener("click", reiniciarPartida);
+		reiniciarBtnGanado.addEventListener("click", reiniciarPartida);
+
 		function detenerCronometro() {
 		    clearInterval(tiempoIntervalo);
 		    tiempoIntervalo = null;
@@ -343,6 +377,37 @@
 		    }, 1000);
 		}
 
+		//victoria
+		function mostrarEstadisticasFinales() {
+		    vidasFinal.textContent = vidasTotales;
+		    puntosFinal.textContent = cantidadPuntos;
+		    tiempoFinal.textContent = reloj.textContent;
+		}
+		function comprobarVictoria() {
+		    let ladrillosRestantes = 0;
+
+		    for (let c = 0; c < numeroLadrillosColumnas; c++) {
+		        for (let r = 0; r < numeroLadrillosFilas; r++) {
+		            if (ladrillos[c][r].status === ESTADO_LADRILLO.VIVO) {
+		                ladrillosRestantes++;
+		            }
+		        }
+		    }
+
+		    if (ladrillosRestantes === 0) {
+		        detenerCronometro();
+		        mostrarEstadisticasFinales();
+		        hasGanado.style.display = "block";
+		        pel.vx = 0;
+		        pel.vy = 0;
+		        pel.x = canvas.width / 2;
+		        pel.y = canvas.height - 50;
+		        pelotaEnJuego = false;
+		    }
+		}
+
+
+
 		  
 
 		//dentro de esta funcion tendremos todas las funciones que necesitaremos para el juego
@@ -362,7 +427,8 @@
 			movimientoPelota();
 			movimientoBarra();
 			restarVidas();
-			reiniciarPartida();
+			//reiniciarPartida();
+			comprobarVictoria();
 			window.requestAnimationFrame(pintar);
 		};
 		pintar();
