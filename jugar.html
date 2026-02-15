@@ -16,11 +16,11 @@
 			</div>
 			<div class="puntuacion">
 				<p><b>PUNTUACION</b></p>
-				<p class="puntos"><b>0</b></p>
+				<p id="puntos" class="puntos"><b>0</b></p>
 			</div>
 			<div class="tiempo">
 				<p><b>TIEMPO</b></p>
-				<p class="reloj"><b>00:00</b></p>
+				<p class="reloj"><b id="reloj">00:00</b></p>
 			</div>
 		</div>
 		<canvas id="juego"></canvas>
@@ -43,6 +43,8 @@
 		const cerrar = document.getElementById("cerrar");
 		const reiniciar = document.getElementById("reiniciarBtn");
 		const volver = document.getElementById("volverBtn");
+		const puntos = document.getElementById("puntos");
+		const reloj = document.getElementById("reloj");
 		const ctx= canvas.getContext('2d');
 		const $bloques= document.querySelector('#bloques');
 		const rect =canvas.getBoundingClientRect();
@@ -52,6 +54,9 @@
 		let pelotaEnJuego = false;
 		let estasVivo=true;
 		let vidasTotales=3;
+		let cantidadPuntos=0;
+		let tiempoInicio = null;
+		let tiempoIntervalo = null;
 		const inicioRandom= Math.random() * (10 - (-10)) + (-10);
 
 		cerrar.addEventListener("click", ()=>{
@@ -69,8 +74,8 @@
 		 	//radiopelota
 			radius: 8,
 			//velocidades
-			vx: inicioRandom,
-			vy: -2
+			vx: 0,
+   			vy: 0
 		};
 
 		//variables de la barra
@@ -229,6 +234,8 @@
 			      ) {
 			        pel.vy *= -1; // rebote
 			        ladrillo.status = ESTADO_LADRILLO.DESTRUIDO;
+			        cantidadPuntos=cantidadPuntos+50;
+			        puntos.textContent=cantidadPuntos;
 			      }
 			    }
 			  }
@@ -248,6 +255,7 @@
 		        	vida1.style.display = "none";
 		        	estasVivo=false;
 		        	hasPerdido.style.display= "block";
+		        	detenerCronometro();
 		        }
 
 		        // Detenemos la pelota
@@ -282,6 +290,11 @@
 		    pel.vx = Math.random() * 10 - 5;
 		    pel.vy = -2;
 		    pelotaEnJuego = true;
+
+		    if (!tiempoIntervalo) {
+		        iniciarCronometro();
+		    }
+
 		}
 
 		//function reiniciar partida
@@ -293,7 +306,11 @@
 				    vida2.style.display = "inline";
 				    vida3.style.display = "inline";
 				    estasVivo=true;
+				    puntos.textContent=0;
+				    cantidadPuntos=0;
 				    reiniciarPelota();
+				    reloj.textContent = "00:00";
+					detenerCronometro();
 
 				    for (let c = 0; c < numeroLadrillosColumnas; c++) {
 				        for (let r = 0; r < numeroLadrillosFilas; r++) {
@@ -304,6 +321,26 @@
 				});
 			}
 			
+		}
+		function detenerCronometro() {
+		    clearInterval(tiempoIntervalo);
+		    tiempoIntervalo = null;
+		}
+
+
+		//cronometro
+		function iniciarCronometro() {
+		    tiempoInicio = Date.now();
+
+		    tiempoIntervalo = setInterval(() => {
+		        const tiempoActual = Math.floor((Date.now() - tiempoInicio) / 1000);
+
+		        let min = Math.floor(tiempoActual / 60);
+		        let seg = tiempoActual % 60;
+
+		        reloj.textContent =
+		            `${min.toString().padStart(2, "0")}:${seg.toString().padStart(2, "0")}`;
+		    }, 1000);
 		}
 
 		  
