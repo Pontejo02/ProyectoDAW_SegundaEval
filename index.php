@@ -1,5 +1,8 @@
 <!--Que funcione mi formulario----------------------------->
 <?php
+session_start();
+$usuario = $_SESSION["usuario"] ?? "Usuario invitado";
+
 $primera = true;
 
 $nomUsuario = "";
@@ -138,7 +141,8 @@ if (isset($_POST["enviar"])) {
     <div class="menu">
         <div id="usuario">
             <img id="iconoUsuario" src="./media/usuarioMarron.png">
-            <p>Usuario invitado</p>
+            <p><?php echo $usuario; ?></p>
+
         </div>
         <a href="jugar.html" class="boton">Jugar</a>
         <a href="carrusel.html" class="boton">Niveles</a>
