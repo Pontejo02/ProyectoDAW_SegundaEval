@@ -33,6 +33,19 @@
 	        <button id="volverBtn">Volver</button>
 	    </div>
     </div>
+    <div id="hasGanado">
+        <img class="salir" id="cerrar" src="./media/x.png" alt="icono de x para salir">
+        <h2>¡HAS GANADO!</h2>
+        <div class="estadisticas">
+	        <p>🧡 Vidas restantes: <span id="vidasFinal"></span></p>
+	        <p>⭐ Puntuación: <span id="puntosFinal"></span></p>
+	        <p>⏱ Tiempo: <span id="tiempoFinal"></span></p>
+	    </div>
+        <div class="botones">
+	        <button id="reiniciarBtn">Reiniciar</button>
+	        <button id="volverBtn">Volver</button>
+	    </div>
+    </div>
 	<img hidden id="bloques" src="./media/marron.jpeg"/>
 	<script type="text/javascript">
 		const canvas =document.getElementById('juego');
@@ -343,6 +356,32 @@
 		    }, 1000);
 		}
 
+		//victoria
+		function mostrarEstadisticasFinales() {
+		    vidasFinal.textContent = vidasTotales;
+		    puntosFinal.textContent = cantidadPuntos;
+		    tiempoFinal.textContent = reloj.textContent;
+		}
+		function comprobarVictoria() {
+		    let ladrillosRestantes = 0;
+
+		    for (let c = 0; c < numeroLadrillosColumnas; c++) {
+		        for (let r = 0; r < numeroLadrillosFilas; r++) {
+		            if (ladrillos[c][r].status === ESTADO_LADRILLO.VIVO) {
+		                ladrillosRestantes++;
+		            }
+		        }
+		    }
+
+		    if (ladrillosRestantes === 0) {
+		        detenerCronometro();
+		        mostrarEstadisticasFinales();
+		        hasGanado.style.display = "block";
+		    }
+		}
+
+
+
 		  
 
 		//dentro de esta funcion tendremos todas las funciones que necesitaremos para el juego
@@ -363,6 +402,7 @@
 			movimientoBarra();
 			restarVidas();
 			reiniciarPartida();
+			comprobarVictoria();
 			window.requestAnimationFrame(pintar);
 		};
 		pintar();
