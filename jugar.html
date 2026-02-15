@@ -25,12 +25,23 @@
 		</div>
 		<canvas id="juego"></canvas>
 	</div>
+	<div id="hasPerdido">
+        <img class="salir" id="cerrar" src="./media/x.png" alt="icono de x para salir">
+        <h2>CÓMO JUGAR</h2>
+        <p>- Controlas una barra o nave en la parte inferior de la pantalla.</p>
+        <p>- Tu objetivo es golpear una pelota para que rebote y rompa todos los ladrillos de la parte superior.</p>
+        <p>- Si la pelota cae por debajo de tu barra, pierdes una vida.</p>
+        <p>- A veces hay ladrillos que tienen comportamientos espaciales (mirar leyenda bloques).</p>
+        <p>- Pasas de nivel cuando eliminas todos los ladrillos.</p>
+    </div>
 	<img hidden id="bloques" src="./media/marron.jpeg"/>
 	<script type="text/javascript">
 		const canvas =document.getElementById('juego');
 		const vida1 =document.getElementById('vida1');
 		const vida2 =document.getElementById('vida2');
 		const vida3 =document.getElementById('vida3');
+		const hasPerdido =document.getElementById('hasPerdido');
+		const cerrar = document.getElementById("cerrar");
 		const ctx= canvas.getContext('2d');
 		const $bloques= document.querySelector('#bloques');
 		const rect =canvas.getBoundingClientRect();
@@ -40,6 +51,12 @@
 		let pelotaEnJuego = false;
 		let vidasTotales=3;
 		const inicioRandom= Math.random() * (10 - (-10)) + (-10);
+
+		cerrar.addEventListener("click", ()=>{
+            hasPerdido.style.display='none';
+        });
+
+
 		//funciones objetos
 
 		//variables de la pelota
@@ -223,9 +240,12 @@
 		function restarVidas(){
 			if (pel.y + pel.radius > canvas.height) {
 		        vidasTotales--;
-		        if (vidasTotales === 2) vida3.style.visibility = "hidden";
-		        else if (vidasTotales === 1) vida2.style.visibility = "hidden";
-		        else if (vidasTotales === 0) vida1.style.visibility = "hidden";
+		        if (vidasTotales === 2) vida3.style.display = "none";
+		        else if (vidasTotales === 1) vida2.style.display = "none";
+		        else if (vidasTotales === 0) {
+		        	vida1.style.display = "none";
+		        	hasPerdido.style.display= "block";
+		        }
 
 		        // Detenemos la pelota
 		        pel.vx = 0;
@@ -253,6 +273,7 @@
 		
 		//funcion reiniciar pelota
 		function reiniciarPelota() {
+			if (vidasTotales <= 0) return;
 		    pel.x = canvas.width / 2;
 		    pel.y = canvas.height - 50;
 		    pel.vx = Math.random() * 10 - 5;
