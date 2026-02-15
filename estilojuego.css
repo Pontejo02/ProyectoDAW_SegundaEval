@@ -206,6 +206,16 @@ img.salir {
     transition: transform 0.2s, background 0.2s;
 }
 
+#reiniciarBtnGanado {
+    background: #f6ffad;
+    color: #4c370f;
+}
+
+#volverBtnGanado {
+    background: #f6ffad;
+    color: #4c370f;
+}
+
 #hasGanado .botones button:hover {
     transform: scale(1.05);
 }
