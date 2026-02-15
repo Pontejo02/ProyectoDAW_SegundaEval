@@ -142,7 +142,6 @@ img.salir {
     font-size: 2rem;
     width: 100%;
     border: none;
-    border-radius: 15px;
     cursor: pointer;
     font-family: Verdana, sans-serif;
     transition: transform 0.2s, background 0.2s;
