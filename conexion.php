@@ -1,5 +1,5 @@
 <?php
-$bd = mysqli_connect("localhost", "root", "", "agenda");
+$bd = mysqli_connect("localhost", "root", "", "juego");
 
 // Comprobamos si ha habido algún error en la conexión
 if (!$bd){
