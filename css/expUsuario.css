@@ -49,8 +49,7 @@ p#logo {
 
 form{
     max-width: 900px;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin: 40px auto;
     background: #f6ffad;
     padding-right: 80px;
     padding-left: 80px;
