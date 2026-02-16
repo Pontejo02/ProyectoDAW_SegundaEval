@@ -273,7 +273,27 @@ $idUsuario = $_SESSION["idUsuario"];
 		        pel.y + pel.radius > bar.y &&
 		        pel.y - pel.radius < bar.y + bar.alto
 		    ) {
-		        pel.vy = -Math.abs(pel.vy); // fuerza que rebote hacia arriba
+		    	//encontramos el centro de la barra sumando el extremo izquierdo y sumandole la mitad del ancho
+		        let centroBarra = bar.x + bar.ancho / 2;
+
+		    	//variable de la distancia que hay entre la pelota y el centro de la barra al chocar
+			    let distancia = pel.x - centroBarra;
+
+			    // Normalizamos entre -1 y 1
+			    let porcentaje = distancia / (bar.ancho / 2);
+
+			    // Limitamos para evitar valores extremos
+			    porcentaje = Math.max(-1, Math.min(1, porcentaje));
+
+			    let velocidad = Math.sqrt(pel.vx * pel.vx + pel.vy * pel.vy);
+
+			    // Ángulo máximo de rebote (60 grados)
+			    let anguloMax = Math.PI / 3;
+
+			    let angulo = porcentaje * anguloMax;
+
+			    pel.vx = velocidad * Math.sin(angulo);
+			    pel.vy = -velocidad * Math.cos(angulo);
 		    }
 		}
 
