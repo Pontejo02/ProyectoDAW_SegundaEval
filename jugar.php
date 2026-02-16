@@ -99,6 +99,13 @@ $idUsuario = $_SESSION["idUsuario"];
             hasGanado.style.display='none';
         });
 
+        volver.addEventListener("click", () => {
+	        window.location.href = "index.php";
+	    });
+	    volverBtnGanado.addEventListener("click", () => {
+	        window.location.href = "index.php";
+	    });
+
 
 		//funciones objetos
 
