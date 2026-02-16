@@ -1,5 +1,4 @@
 <?php session_start();
-session_start();
 
 // Si no hay idUsuario en la sesión, redirige al login
 if (!isset($_SESSION["idUsuario"])) {
