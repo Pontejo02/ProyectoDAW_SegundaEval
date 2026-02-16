@@ -148,7 +148,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if (mysqli_affected_rows($bd) > 0) {
                 //empezamos una sesion antes de ir a bienvenida
                 session_start();
+                $idRecienCreado = mysqli_insert_id($bd);
                 $_SESSION["usuario"] = $nombreUsuario;
+                $_SESSION["idUsuario"] = $idRecienCreado;
                 // Redirigir a la página de bienvenida y envia el usuario por url
                 header("Location: bienvenida.php?usuario=" . urlencode($nombreUsuario));
                 exit;

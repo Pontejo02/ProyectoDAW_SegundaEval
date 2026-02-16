@@ -1,3 +1,15 @@
+<?php session_start();
+session_start();
+
+// Si no hay idUsuario en la sesión, redirige al login
+if (!isset($_SESSION["idUsuario"])) {
+    header("Location: index.php");
+    exit();
+}
+
+$usuario = $_SESSION["usuario"];
+$idUsuario = $_SESSION["idUsuario"];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,6 +89,7 @@
 		let cantidadPuntos=0;
 		let tiempoInicio = null;
 		let tiempoIntervalo = null;
+		let puntuacionGuardada = false;
 		const inicioRandom= Math.random() * (10 - (-10)) + (-10);
 
 		cerrar.addEventListener("click", ()=>{
@@ -192,6 +205,20 @@
 		    ctx.clearRect(0, 0, canvas.width, canvas.height);
 		}
 
+		function guardarPuntuacion() {
+		    fetch("guardarPuntuacion.php", {
+		        method: "POST",
+		        headers: {
+		            "Content-Type": "application/x-www-form-urlencoded"
+		        },
+		        body: "puntuacion=" + cantidadPuntos + "&idnivel=1"
+		    })
+		    .then(res => res.text())
+		    .then(data => {
+		        console.log("Guardado:", data);
+		    });
+		}
+
 		function movimientoBarra() {
 		  if (!movimientoBarra.iniciado) {
 
@@ -285,11 +312,13 @@
 		        vidasTotales--;
 		        if (vidasTotales === 2) vida3.style.display = "none";
 		        else if (vidasTotales === 1) vida2.style.display = "none";
-		        else if (vidasTotales === 0) {
+		        else if (vidasTotales === 0 && !puntuacionGuardada) {
 		        	vida1.style.display = "none";
 		        	estasVivo=false;
 		        	hasPerdido.style.display= "block";
 		        	detenerCronometro();
+		        	puntuacionGuardada = true;
+		        	guardarPuntuacion();
 		        }
 
 		        // Detenemos la pelota
@@ -357,7 +386,7 @@
 		    pel.x = canvas.width / 2;
 		    pel.y = canvas.height - 50;
 		    pelotaEnJuego = false;
-
+		    puntuacionGuardada = false;
 		    hasPerdido.style.display = "none";
 		    hasGanado.style.display = "none";
 			
@@ -407,6 +436,8 @@
 		    if (ladrillosRestantes === 0) {
 		        detenerCronometro();
 		        mostrarEstadisticasFinales();
+		        guardarPuntuacion();
+		        puntuacionGuardada = true;
 		        hasGanado.style.display = "block";
 		        pel.vx = 0;
 		        pel.vy = 0;
