@@ -312,11 +312,11 @@ $idUsuario = $_SESSION["idUsuario"];
 		        if (vidasTotales === 2) vida3.style.display = "none";
 		        else if (vidasTotales === 1) vida2.style.display = "none";
 		        else if (vidasTotales === 0 && !puntuacionGuardada) {
+		        	puntuacionGuardada = true;
 		        	vida1.style.display = "none";
 		        	estasVivo=false;
 		        	hasPerdido.style.display= "block";
 		        	detenerCronometro();
-		        	puntuacionGuardada = true;
 		        	guardarPuntuacion();
 		        }
 
@@ -433,10 +433,10 @@ $idUsuario = $_SESSION["idUsuario"];
 		    }
 
 		    if (ladrillosRestantes === 0) {
+		    	puntuacionGuardada = true;
 		        detenerCronometro();
 		        mostrarEstadisticasFinales();
 		        guardarPuntuacion();
-		        puntuacionGuardada = true;
 		        hasGanado.style.display = "block";
 		        pel.vx = 0;
 		        pel.vy = 0;
