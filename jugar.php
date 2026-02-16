@@ -76,6 +76,7 @@ $idUsuario = $_SESSION["idUsuario"];
 		const vidasFinal = document.getElementById("vidasFinal");
 		const puntosFinal = document.getElementById("puntosFinal");
 		const tiempoFinal = document.getElementById("tiempoFinal");
+		const btnAtras = document.getElementById("btnAtras");
 		const ctx= canvas.getContext('2d');
 		const $bloques= document.querySelector('#bloques');
 		const rect =canvas.getBoundingClientRect();
@@ -103,6 +104,10 @@ $idUsuario = $_SESSION["idUsuario"];
 	        window.location.href = "index.php";
 	    });
 	    volverBtnGanado.addEventListener("click", () => {
+	        window.location.href = "index.php";
+	    });
+
+	    btnAtras.addEventListener("click", () => {
 	        window.location.href = "index.php";
 	    });
 
