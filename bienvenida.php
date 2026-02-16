@@ -51,15 +51,20 @@ $usuario = $_SESSION["usuario"];
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const logout = document.getElementById("logout");
 
-    if(logout){
-        logout.addEventListener("click", () => {
-            window.location.href = "./usuario/cerrarSesion.php";
-        });
-    }
+    const btnInicio = document.getElementById("btnInicio");
+    btnInicio.addEventListener("click", () => {
+        window.location.href = "index.php";
+    });
+
+    const btnLogout = document.getElementById("btnLogout");
+    btnLogout.addEventListener("click", () => {
+        window.location.href = "./usuario/cerrarSesion.php";
+    });
+
 });
 </script>
+
 
 
 </body>
