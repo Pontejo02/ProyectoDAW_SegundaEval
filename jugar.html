@@ -210,7 +210,17 @@
 		    });
 
 		    document.addEventListener("mousemove", (e) => {
-			    bar.x = e.clientX-500;
+			    const rect = canvas.getBoundingClientRect(); //recogemos el tamaño y la posicion del canvas
+
+			    const mouseX = e.clientX - rect.left;
+
+			    bar.x = mouseX - bar.ancho / 2;
+
+			    // Limitamos el listener a dentro del canvas
+			    if (bar.x < 0) bar.x = 0;
+			    if (bar.x + bar.ancho > canvas.width) {
+			        bar.x = canvas.width - bar.ancho;
+			    }
 			});
 
 		    bar.direccion = 0;
