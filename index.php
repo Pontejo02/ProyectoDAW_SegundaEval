@@ -12,6 +12,8 @@ $errorNom = "";
 $errorPassword = "";
 
 if (isset($_POST["enviar"])) {
+    require_once "conexion.php";
+
     $primera = false;
 
     // VALIDAR NOMBRE
@@ -38,13 +40,38 @@ if (isset($_POST["enviar"])) {
         }
     }
 
-    // SI NO HAY ERRORES → LOGIN CORRECTO aqui en realidad iria la conexion de bbdd
+    // SI NO HAY ERRORES → COMPROBAR LOGIN EN LA BBDD
+
     if ($errorNom === "" && $errorPassword === "") {
-        echo "<h2>Login correcto</h2>";
-        exit;
+
+        $sql = "SELECT * FROM usuarios WHERE nombreUsuario = ?";
+        $stmt = $bd->prepare($sql);
+        $stmt->bind_param("s", $nomUsuario);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        if ($resultado->num_rows === 1) {
+            $usuarioDB = $resultado->fetch_assoc();
+
+            if (password_verify($password, $usuarioDB["contraseniaUsuario"])) {
+
+                $_SESSION["usuario"] = $usuarioDB["nombreUsuario"];
+                $_SESSION["idUsuario"] = $usuarioDB["idUsuario"];
+
+                header("Location: bienvenida.php");
+                exit;
+
+            } else {
+                $errorPassword = "Contraseña incorrecta.";
+            }
+
+        } else {
+            $errorNom = "El usuario no existe.";
+        }
     }
 }
 ?>
+
 <!--empieza el html-------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="es">
@@ -69,11 +96,6 @@ if (isset($_POST["enviar"])) {
         <div class="campo"> 
             <label for="usuario">Nombre de usuario</label> 
             <input type="text" id="nomUsuario" name="nomUsuario" value="<?php echo $nomUsuario; ?>" />
-            <?php 
-            if (!$primera && $errorNom !== "") {
-                echo "<p class='error'>$errorNom</p>";
-            }
-            ?>
         </div> 
 
         <div class="campo">
@@ -87,7 +109,7 @@ if (isset($_POST["enviar"])) {
         </div>
 
     <button class="btnVentana" type="submit" name="enviar">Entrar</button>
-    <button class="btnVentana" type="button">Regístrate</button>
+    <button class="btnVentana" type="button" id="btnRegistro">Registrarme</button>
 </form>
 
     </div>
@@ -163,6 +185,7 @@ if (isset($_POST["enviar"])) {
         const btnsubmenu = document.getElementById("submenu");
         const btnUsuario = document.getElementById("usuario");
         const introUsuario = document.getElementById("introUsuario");
+        const btnRegistro = document.getElementById("btnRegistro");
         const cerrarUsuario = document.getElementById("cerrarUsuario");
         const btncomoJugar = document.getElementById("btncomoJugar");
         const comoJugar = document.getElementById("comoJugar");
@@ -171,8 +194,9 @@ if (isset($_POST["enviar"])) {
         const leyendaBloques = document.getElementById("leyendaBloques");
         const btnleyendaBloques = document.getElementById("btnleyendaBloques");
         
-        btnUsuario.addEventListener("click", ()=>{
-            introUsuario.style.display='block';
+
+        btnRegistro.addEventListener("click", () => {
+            window.location.href = "./formUsuario.php";
         });
         cerrarUsuario.addEventListener("click", ()=>{
             introUsuario.style.display='none';
@@ -198,6 +222,23 @@ if (isset($_POST["enviar"])) {
         });
     });
     </script>
+<!--que el boton usuario haga visible el div para entrar o vaya a bienvenida:--------------------------------->
+    <?php if(isset($_SESSION["usuario"])): ?>
+        <script>
+        document.getElementById("usuario").addEventListener("click", ()=>{
+            window.location.href = "bienvenida.php";
+        });
+        </script>
+    <?php else: ?>
+        <script>
+        document.getElementById("usuario").addEventListener("click", ()=>{
+            document.getElementById("introUsuario").style.display = 'block';
+        });
+        </script>
+    <?php endif; ?>
+
+
     <script type="module" src="./main.js"></script>
 </body>
 </html>
+
