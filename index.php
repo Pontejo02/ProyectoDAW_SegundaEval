@@ -167,7 +167,7 @@ if (isset($_POST["enviar"])) {
 
         </div>
         <a href="jugar.php" class="boton">Jugar</a>
-        <a href="carrusel.html" class="boton">Niveles</a>
+        <a href="carrusel.php" class="boton">Niveles</a>
         <button id="instrucciones" class="boton">Instrucciones</button>
         <div id="submenu">
             <button id="btncomoJugar" class="boton">Cómo jugar</button>
