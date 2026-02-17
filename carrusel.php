@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="estilos.css">
 </head>
 <body>
+    <div id="btnAtras"><b>←</b></div>
 	<section class="niveles">
     <h2 class=titulonivel>Los niveles</h2>
 

@@ -3,7 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const niveles = document.querySelectorAll(".nivel");
     const puntosCont = document.getElementById("puntos");
     const carrusel = document.querySelector(".lista-niveles");
+    const btnAtras = document.getElementById("btnAtras");
 
+    btnAtras.addEventListener("click", () => {
+        window.location.href = "./index.php";
+    });
+    
     let actual = 0;
     let inicioX = 0;
 
