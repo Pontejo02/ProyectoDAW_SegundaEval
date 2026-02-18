@@ -78,7 +78,8 @@ if (isset($_POST["enviar"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>World Blocks</title>
+    <link rel="icon" href="./media/W.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="estilos.css">
     <link rel="stylesheet" type="text/css" href="./css/formularios.css">
     <!-- Fuente de google fonts -->
