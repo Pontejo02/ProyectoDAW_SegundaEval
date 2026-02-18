@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'Doto';
+    src: url('fuentes/Doto-VariableFont_ROND,wght.ttf');
+}
 html {
     background-color: #f6ffad;
 }
