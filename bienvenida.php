@@ -9,6 +9,10 @@ $usuario = $_SESSION["usuario"];
 <title>huuula</title>
 <link href="./css/expUsuario.css" rel="stylesheet">
 <link href="./css/consultas.css" rel="stylesheet">
+<!-- Fuente de google fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
