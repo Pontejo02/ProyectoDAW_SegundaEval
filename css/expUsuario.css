@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'Doto';
+    src: url('fuentes/Doto-VariableFont_ROND,wght.ttf');
+}
 body{
     background-color:#cfdc5d;
     font-family: Verdana, sans-serif;
