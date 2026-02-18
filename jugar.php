@@ -13,6 +13,7 @@ $idUsuario = $_SESSION["idUsuario"];
 <html>
 <head>
 	<title>Juego</title>
+	<link rel="icon" href="./media/W.png" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="estilojuego.css">
 	<!-- Fuente de google fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
