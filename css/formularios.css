@@ -1,4 +1,7 @@
-
+@font-face {
+    font-family: 'Doto';
+    src: url('fuentes/Doto-VariableFont_ROND,wght.ttf');
+}
 
 label {
     color:#4c370f;
