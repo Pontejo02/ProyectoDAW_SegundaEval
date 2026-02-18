@@ -172,7 +172,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulario Usuarios</title>
+<title>Formulario nuevos usuarios</title>
+<link rel="icon" href="./media/W.png" type="image/x-icon">
 <link href="./css/expUsuario.css" rel="stylesheet">
 <!-- Fuente de google fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
