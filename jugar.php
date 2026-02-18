@@ -44,6 +44,7 @@ $idUsuario = $_SESSION["idUsuario"];
 	<div id="hasPerdido">
         <img class="salir" id="cerrar" src="./media/x.png" alt="icono de x para salir">
         <h2>¡HAS PERDIDO!</h2>
+		<img id="skull" src="./media/skull.png" alt="una calavera">
         <div class="botones">
 	        <button id="reiniciarBtn">Reiniciar</button>
 	        <button id="volverBtn">Volver</button>
@@ -52,17 +53,23 @@ $idUsuario = $_SESSION["idUsuario"];
     <div id="hasGanado">
         <img class="salir" id="cerrar2" src="./media/x.png" alt="icono de x para salir">
         <h2>¡HAS GANADO!</h2>
+		<img id="trofeo" src="./media/rectangulo.png" alt="trofeo">
         <div class="estadisticas">
-	        <p>🧡 Vidas restantes: <span id="vidasFinal"></span></p>
-	        <p>⭐ Puntuación: <span id="puntosFinal"></span></p>
-	        <p>⏱ Tiempo: <span id="tiempoFinal"></span></p>
+	        <p>Vidas restantes: <span id="vidasFinal"></span></p>
+	        <p>Puntuación: <span id="puntosFinal"></span></p>
+	        <p>Tiempo: <span id="tiempoFinal"></span></p>
 	    </div>
         <div class="botones">
-	        <button id="reiniciarBtnGanado">Reiniciar</button>
 	        <button id="volverBtnGanado">Volver</button>
+			<button id="reiniciarBtnGanado">Reiniciar</button>
 	    </div>
     </div>
 	<img hidden id="bloques" src="./media/marron.jpeg"/>
+	<img hidden id="powerCorazon" src="./media/europa2.png">
+	<img hidden id="powerLinea" src="./media/Asia2.png">
+	<img hidden id="powerBarra" src="./media/Oceania2.png">
+	<img hidden id="powerPelotasRapidas" src="./media/Africa2.png">
+	<img hidden id="powerExplosion" src="./media/America2.png">
 	<script type="text/javascript">
 		const canvas =document.getElementById('juego');
 		const vida1 =document.getElementById('vida1');
@@ -86,6 +93,14 @@ $idUsuario = $_SESSION["idUsuario"];
 		const $bloques= document.querySelector('#bloques');
 		const rect =canvas.getBoundingClientRect();
 
+		//power ups
+		const powerCorazon = document.getElementById("powerCorazon");
+		const powerLinea = document.getElementById("powerLinea");
+		const powerBarra = document.getElementById("powerBarra");
+		const powerPelotasRapidas = document.getElementById("powerPelotasRapidas");
+		const powerExplosion = document.getElementById("powerExplosion");
+
+
 		canvas.width=700;
 		canvas.height=500;
 		let pelotaEnJuego = false;
@@ -95,7 +110,23 @@ $idUsuario = $_SESSION["idUsuario"];
 		let tiempoInicio = null;
 		let tiempoIntervalo = null;
 		let puntuacionGuardada = false;
+		let velocidadMultiplicador = 1; // 1 = velocidad normal, 2 = rápida
 		const inicioRandom= Math.random() * (10 - (-10)) + (-10);
+
+
+		//variables power ups
+		const powerUps = [];
+		const PROBABILIDAD_POWERUP = 0.2; // 20% de probabilidad
+
+		const TIPOS_POWERUP = {
+			VIDA_EXTRA: "vida",
+			//MAS_PELOTAS: "maspelotas", power up futuro
+			LINEA: "linea",
+			EXPLOSION: "explosion",
+			GRAVEDAD: "gravedad"
+		};
+
+
 
 		cerrar.addEventListener("click", ()=>{
             hasPerdido.style.display='none';
@@ -128,7 +159,8 @@ $idUsuario = $_SESSION["idUsuario"];
 			radius: 8,
 			//velocidades
 			vx: 0,
-   			vy: 0
+   			vy: 0,
+   			velocidadBase: 3
 		};
 
 		//variables de la barra
@@ -140,7 +172,9 @@ $idUsuario = $_SESSION["idUsuario"];
 			ancho: 150,
 			alto: 10,
 			//velocidad barra
-			vx: 10
+			vx: 10,
+			activarLinea: false,
+			activarExplosion: false
 		};
 
 		function pelota(){
@@ -152,8 +186,8 @@ $idUsuario = $_SESSION["idUsuario"];
 		};
 
 		function movimientoPelota(){
-			pel.x += pel.vx;
-			pel.y += pel.vy;
+			pel.x += pel.vx * velocidadMultiplicador;
+    		pel.y += pel.vy * velocidadMultiplicador;
 		}
 
 		function barra(){
@@ -310,35 +344,247 @@ $idUsuario = $_SESSION["idUsuario"];
 			    let angulo = porcentaje * anguloMax;
 
 			    pel.vx = velocidad * Math.sin(angulo);
-			    pel.vy = -velocidad * Math.cos(angulo);
+				pel.vy = -velocidad * Math.cos(angulo);
+
 		    }
 		}
 
-		function choqueLadrillos(){
-			// Colisión con ladrillos
-			for (let c = 0; c < numeroLadrillosColumnas; c++) {
-			  for (let r = 0; r < numeroLadrillosFilas; r++) {
+		function dibujarPowerUps() {
+		    powerUps.forEach(p => {
 
-			    const ladrillo = ladrillos[c][r];
+		        if (p.tipo === TIPOS_POWERUP.VIDA_EXTRA) {
+		            ctx.drawImage(
+				        powerCorazon,
+				        p.x - p.size,
+				        p.y - p.size,
+				        p.size * 2,
+				        p.size * 2
+				    );
 
-			    if (ladrillo.status === ESTADO_LADRILLO.VIVO) {
+				} else {
 
-			      if (
-			        pel.x + pel.radius > ladrillo.x &&
-			        pel.x - pel.radius < ladrillo.x + anchoLadrillo &&
-			        pel.y + pel.radius > ladrillo.y &&
-			        pel.y - pel.radius < ladrillo.y + altoLadrillo
-			      ) {
-			        pel.vy *= -1; // rebote
-			        ladrillo.status = ESTADO_LADRILLO.DESTRUIDO;
-			        cantidadPuntos=cantidadPuntos+50;
-			        puntos.textContent=cantidadPuntos;
-			      }
+				    if (p.tipo === TIPOS_POWERUP.GRAVEDAD) {
+					    const size = p.size;
+					    ctx.drawImage(
+					        powerBarra,
+					        p.x - size,
+					        p.y - size,
+					        size * 2,
+					        size * 2
+					    );
+					}
+				    if (p.tipo === TIPOS_POWERUP.LINEA){
+					    	ctx.drawImage(
+					        powerLinea,
+					        p.x - p.size,
+					        p.y - p.size,
+					        p.size * 2,
+					        p.size * 2
+					    );
+				    } 
+				    if (p.tipo === TIPOS_POWERUP.EXPLOSION) {
+					    const anchoExplosion = 32;
+					    const altoExplosion = 32;
+					    ctx.drawImage(
+					        powerExplosion,
+					        p.x - anchoExplosion / 2,
+					        p.y - altoExplosion / 2,
+					        anchoExplosion,
+					        altoExplosion
+					    );
+					}
+
+
+				    ctx.fill();
+				    ctx.closePath();
+		        }
+		    });
+		}
+
+		function moverPowerUps() {
+		    powerUps.forEach(p => {
+		        p.y += p.velocidad;
+		    });
+		}
+
+		function detectarPowerUpBarra() {
+		    for (let i = powerUps.length - 1; i >= 0; i--) {
+		        const p = powerUps[i];
+
+		        // Si toca barra
+		        if (
+		            p.x > bar.x &&
+		            p.x < bar.x + bar.ancho &&
+		            p.y + p.size > bar.y &&
+		            p.y - p.size < bar.y + bar.alto
+		        ) {
+		            if (p.tipo === TIPOS_POWERUP.LINEA) {
+		                bar.activarLinea = true;
+		            } else if (p.tipo === TIPOS_POWERUP.EXPLOSION) {
+		                pel.activarExplosion = true; // <-- bandera en la pelota
+		            } else if (p.tipo === TIPOS_POWERUP.PELOTA_RAPIDA) {
+				        activarPowerUp(p.tipo); // <-- velocidad
+				    } else {
+		                activarPowerUp(p.tipo);
+		            }
+
+		            powerUps.splice(i, 1); // eliminar power-up del array
+		        }
+
+		        // Si cae fuera del canvas
+		        else if (p.y > canvas.height) {
+		            powerUps.splice(i, 1);
+		        }
+		    }
+		}
+
+
+		function activarPowerUp(tipo) {
+
+		    if (tipo === TIPOS_POWERUP.VIDA_EXTRA) {
+
+			    if (vidasTotales < 3) {
+
+			        vidasTotales++;
+
+			        if (vidasTotales === 1) {
+			            vida1.style.display = "inline";
+			        }
+
+			        if (vidasTotales === 2) {
+			            vida2.style.display = "inline";
+			        }
+
+			        if (vidasTotales === 3) {
+			            vida3.style.display = "inline";
+			        }
+
 			    }
-			  }
+
+
+		    } else if (tipo === TIPOS_POWERUP.BARRA_GRANDE) {
+
+		        bar.ancho += 50;
+
+		        setTimeout(() => {
+		            bar.ancho -= 50;
+		        }, 8000); // dura 8 segundos
+
+		    } else if (tipo === TIPOS_POWERUP.GRAVEDAD) {
+			    velocidadMultiplicador = 2; // aumenta velocidad
+			    setTimeout(() => {
+			        velocidadMultiplicador = 1; // vuelve a normal tras 15s
+			    }, 15000);
+			
+
+		    }else if (tipo === TIPOS_POWERUP.LINEA) {
+			    // Activar power-up línea
+			    bar.activarLinea = true;  // marcamos que la próxima colisión destruirá la línea
+			}else if (tipo === TIPOS_POWERUP.EXPLOSION) {
+			    bar.activarLinea = true;
+			    const radioExplosion = 60; // radio de destrucción en píxeles
+
+			    for (let c = 0; c < numeroLadrillosColumnas; c++) {
+			        for (let r = 0; r < numeroLadrillosFilas; r++) {
+			            const ladrillo = ladrillos[c][r];
+
+			            if (ladrillo.status === ESTADO_LADRILLO.VIVO) {
+			                // Calculamos el centro del ladrillo
+			                const centroX = ladrillo.x + anchoLadrillo / 2;
+			                const centroY = ladrillo.y + altoLadrillo / 2;
+
+			                const distancia = Math.hypot(centroX - bar.x - bar.ancho/2, centroY - bar.y - bar.alto/2);
+
+			                if (distancia <= radioExplosion) {
+			                    ladrillo.status = ESTADO_LADRILLO.DESTRUIDO;
+			                    cantidadPuntos += 50;
+			                }
+			            }
+			        }
+			    }
+
+			    puntos.textContent = cantidadPuntos;
 			}
 
+
 		}
+
+
+
+
+		function choqueLadrillos(){
+		    for (let c = 0; c < numeroLadrillosColumnas; c++) {
+		        for (let r = 0; r < numeroLadrillosFilas; r++) {
+		            const ladrillo = ladrillos[c][r];
+
+		            if (ladrillo.status === ESTADO_LADRILLO.VIVO) {
+		                if (
+		                    pel.x + pel.radius > ladrillo.x &&
+		                    pel.x - pel.radius < ladrillo.x + anchoLadrillo &&
+		                    pel.y + pel.radius > ladrillo.y &&
+		                    pel.y - pel.radius < ladrillo.y + altoLadrillo
+		                ) {
+		                    pel.vy *= -1; // rebote
+
+		                    if (bar.activarLinea) {
+		                        // destruir toda la fila
+		                        for (let c2 = 0; c2 < numeroLadrillosColumnas; c2++) {
+		                            if (ladrillos[c2][r].status === ESTADO_LADRILLO.VIVO) {
+		                                ladrillos[c2][r].status = ESTADO_LADRILLO.DESTRUIDO;
+		                                cantidadPuntos += 50;
+		                            }
+		                        }
+		                        bar.activarLinea = false;
+		                    } 
+		                    else if (pel.activarExplosion) {
+		                        const radioExplosion = 60; // píxeles
+		                        const centroX = ladrillo.x + anchoLadrillo / 2;
+		                        const centroY = ladrillo.y + altoLadrillo / 2;
+
+		                        for (let c2 = 0; c2 < numeroLadrillosColumnas; c2++) {
+		                            for (let r2 = 0; r2 < numeroLadrillosFilas; r2++) {
+		                                const l = ladrillos[c2][r2];
+		                                if (l.status === ESTADO_LADRILLO.VIVO) {
+		                                    const lCentroX = l.x + anchoLadrillo / 2;
+		                                    const lCentroY = l.y + altoLadrillo / 2;
+		                                    const distancia = Math.hypot(lCentroX - centroX, lCentroY - centroY);
+		                                    if (distancia <= radioExplosion) {
+		                                        l.status = ESTADO_LADRILLO.DESTRUIDO;
+		                                        cantidadPuntos += 50;
+		                                    }
+		                                }
+		                            }
+		                        }
+
+		                        pel.activarExplosion = false; // desactivamos después de usar
+		                    } 
+		                    else {
+		                        // destruir solo este ladrillo
+		                        ladrillo.status = ESTADO_LADRILLO.DESTRUIDO;
+		                        cantidadPuntos += 50;
+		                    }
+
+		                    puntos.textContent = cantidadPuntos;
+
+		                    // generar power-up aleatoriamente
+		                    if (Math.random() < PROBABILIDAD_POWERUP) {
+		                        const tipos = Object.values(TIPOS_POWERUP);
+		                        const tipoRandom = tipos[Math.floor(Math.random() * tipos.length)];
+		                        powerUps.push({
+		                            x: ladrillo.x + anchoLadrillo / 2,
+		                            y: ladrillo.y,
+		                            tipo: tipoRandom,
+		                            velocidad: 2,
+		                            size: 15
+		                        });
+		                    }
+		                }
+		            }
+		        }
+		    }
+		}
+
+
 
 
 		//vida
@@ -386,8 +632,9 @@ $idUsuario = $_SESSION["idUsuario"];
 			if (vidasTotales <= 0) return;
 		    pel.x = canvas.width / 2;
 		    pel.y = canvas.height - 50;
-		    pel.vx = Math.random() * 10 - 5;
-		    pel.vy = -2;
+		    let velocidadBase = 3; // velocidad base para que se note
+		    pel.vx = (Math.random() * 2 - 1) * velocidadBase; // -3 a 3
+		    pel.vy = -velocidadBase; // siempre hacia arriba al inicio
 		    pelotaEnJuego = true;
 
 		    if (!tiempoIntervalo) {
@@ -485,6 +732,8 @@ $idUsuario = $_SESSION["idUsuario"];
 
 
 
+
+
 		  
 
 		//dentro de esta funcion tendremos todas las funciones que necesitaremos para el juego
@@ -506,6 +755,9 @@ $idUsuario = $_SESSION["idUsuario"];
 			restarVidas();
 			//reiniciarPartida();
 			comprobarVictoria();
+			dibujarPowerUps();
+			moverPowerUps();
+			detectarPowerUpBarra();
 			window.requestAnimationFrame(pintar);
 		};
 		pintar();
