@@ -108,20 +108,22 @@ canvas{
     width: 80vw;         /* ocupa gran parte del ancho de la pantalla */
     max-width: 800px;    /* máximo ancho */
     padding: 40px 20px;
-    display: none;
+    display: block;
     flex-direction: column;  /* apilar contenido verticalmente */
     align-items: center;     /* centrar horizontal */
     justify-content: center; /* centrar vertical dentro del cuadro */
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
     text-align: center;
-    width: 800px;
-    height: 500px;
+    max-width: 700px;
+    min-height: 500px;
+    color:#4c370f;
+    font-family: Verdana, sans-serif;
+    font-size: 0.9rem;
 }
 
 #hasPerdido h2 {
     color: #4c370f;
     font-family: Verdana, sans-serif;
-    font-size: 4rem;      /* título gigante */
+    font-size: 3rem;   
     margin-bottom: 50px;
 }
 
@@ -136,20 +138,28 @@ img.salir {
 }
 
 #hasPerdido .botones {
-    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: center;     /* centrar horizontal */
+    justify-content: center; /* centrar vertical dentro del cuadro */
+    text-align: center;
+
 }
 
 #hasPerdido .botones button {
-    padding: 20px 0;
-    font-size: 2rem;
-    width: 100%;
+    padding: 20px 60px;
+    max-width: 300px;
+    font-size: 1rem;
     border: none;
     cursor: pointer;
     font-family: Verdana, sans-serif;
     transition: transform 0.2s, background 0.2s;
+    border:1px solid #4c370f;
+}
+#skull {
+    height: 60px;
+    margin-bottom: 50px;
 }
 
 #reiniciarBtn {
@@ -177,38 +187,47 @@ img.salir {
     width: 80vw;         /* ocupa gran parte del ancho de la pantalla */
     max-width: 800px;    /* máximo ancho */
     padding: 40px 20px;
-    display: none;
+    display: block;
     flex-direction: column;  /* apilar contenido verticalmente */
     align-items: center;     /* centrar horizontal */
     justify-content: center; /* centrar vertical dentro del cuadro */
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
     text-align: center;
-    width: 800px;
-    height: 500px;
+    max-width: 700px;
+    min-height: 500px;
+    color:#4c370f;
+    font-family: Verdana, sans-serif;
+    font-size: 0.9rem;
+}
+#trofeo {
+    height: 50px;
+    margin-bottom: 35px;
 }
 
 #hasGanado h2 {
     color: #4c370f;
     font-family: Verdana, sans-serif;
-    font-size: 4rem;      /* título gigante */
+    font-size: 3rem;   
     margin-bottom: 50px;
 }
 
 #hasGanado .botones {
-    width: 100%;
+    margin-top: 50px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 #hasGanado .botones button {
-    padding: 20px 0;
-    font-size: 2rem;
-    width: 100%;
+    padding: 20px 60px;
+    font-size: 1rem;
     border: none;
     cursor: pointer;
     font-family: Verdana, sans-serif;
     transition: transform 0.2s, background 0.2s;
+    border:1px solid #4c370f;
 }
 
 #reiniciarBtnGanado {
@@ -224,39 +243,3 @@ img.salir {
 #hasGanado .botones button:hover {
     transform: scale(1.05);
 }
-
-
-
-/*DISEÑO*/
-/*#btnModo{
-    display: flex;
-    margin-top: 0;
-    border: 2px solid black;
-}*/
-
-/* Botón Toggle (Estilo Bonito) */
-    /*.theme-switch {
-        width: 60px;
-        height: 30px;
-        background-color: var(--toggle-bg);
-        border-radius: 15px;
-        position: relative;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .theme-switch-circle {
-        width: 26px;
-        height: 26px;
-        background-color: var(--circle-color);
-        border-radius: 50%;
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        transition: transform 0.3s;
-    }*/
-
-    /* Cuando esté activo (dark mode) */
-    /*body.dark-mode .theme-switch-circle {
-        transform: translateX(30px);
-    }*/
