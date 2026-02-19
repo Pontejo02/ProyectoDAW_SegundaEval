@@ -278,6 +278,36 @@ header {
     align-items: center;
 }
 
+#bienvenidaU{
+    font-size: 2rem;
+}
+
+.fila {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap:100px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 70px;
+}
+
+.columnaAjustes {
+    display: flex;
+    background-color: #4c370f;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    padding: 40px 50px;
+}
+
+.columnaAjustes h2 {
+    color: #f6ffad;
+    margin-top: 0;
+}
+
 .acciones {
     display: flex;
     gap: 10px;
@@ -287,13 +317,14 @@ header {
 }
 
 #rectBienv{
-    margin: auto;
+    margin: 0;
     background-color: #f6ffad;
-    padding-right: 80px;
-    padding-left: 80px;
-    padding-bottom: 50px;
-    padding-top: 20px;
-    max-width: 250px;
+    width: 250px;
+    height: 250px;
+    padding: 40px 50px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 img.salir {
@@ -331,7 +362,40 @@ img.salir {
         cursor: pointer;
     }
 } 
-#cambiarNombreBox {
+#cambiarNombre {
     margin-top: 10px;
-    display: flex;
+    position: relative;
+    top: 90px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 15px;
+    width: 270px;
+    height: 150px;
+    text-align: center;
+    align-content: center;
+    aspect-ratio: 1/1;
+    display: none;
+}
+
+#cerrarInv {
+    width: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+@media(max-width:800px) {
+    .fila {
+        margin-top: 40px;
+        flex-direction: column;
+        gap:50px;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+    }
 }
