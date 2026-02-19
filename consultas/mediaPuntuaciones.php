@@ -1,6 +1,6 @@
 <?php
 $idusuario= $_SESSION["idUsuario"];
-echo "<h3>📊 Media de puntuaciones por usuario</h3>";
+echo "<h3 class='centrar'>Media de puntuaciones del usuario</h3>";
 
 $sql2 = "
 SELECT 
@@ -15,21 +15,9 @@ GROUP BY n.idUsuario
 
 
 $res2 = mysqli_query($bd, $sql2);
+echo "<p class='centrar'>Tu media de puntuación es:<p>";
+echo "<p class='grande centrar'>".$fila['mediap']."</p>";
+echo "<p class='centrar'>Tu media de tiempo es:";
+echo "<p class='grande centrar'>".$fila['mediat']."</p>";
 
-echo "<table class='tabla-ranking'>";
-echo "<tr>
-        <th>Usuario</th>
-        <th>Media de puntuación</th>
-        <th>Media de tiempo</th>
-      </tr>";
-
-while ($fila = mysqli_fetch_assoc($res2)) {
-    echo "<tr>";
-    echo "<td>".$fila['nombreUsuario']."</td>";
-    echo "<td>".$fila['mediap']."</td>";
-    echo "<td>".$fila['mediat']."</td>";
-    echo "</tr>";
-}
-
-echo "</table>";
 ?>
