@@ -5,12 +5,12 @@ CREATE DATABASE IF NOT EXISTS juego DEFAULT CHARACTER SET utf8 COLLATE utf8_span
 USE juego;
 
 -- Estructura de tabla para la tabla `niveles`
-CREATE TABLE IF NOT EXISTS niveles (
+/*CREATE TABLE IF NOT EXISTS niveles (
   idNiveles INT AUTO_INCREMENT,
   nombreNivel VARCHAR(20) NOT NULL,
   descripcionNiveles varchar(200),
   PRIMARY KEY (idNiveles)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;*/
 
 -- Estructura de tabla para la tabla `usuarios`
 CREATE TABLE usuarios (
@@ -34,16 +34,17 @@ CREATE TABLE puntuaciones (
     idPuntuacion INT AUTO_INCREMENT,
     fecha DATETIME NOT NULL,
     puntuacion INT NOT NULL,
+    tiempo TIME NOT NULL,
     idNiveles INT NOT NULL,
     idUsuario INT NOT NULL,
     PRIMARY KEY (idPuntuacion),
     FOREIGN KEY (idUsuario) 
         REFERENCES usuarios(idUsuario)
         ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    FOREIGN KEY (idNiveles) 
+        ON UPDATE CASCADE
+    /*FOREIGN KEY (idNiveles) 
         REFERENCES niveles(idNiveles)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE*/
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 

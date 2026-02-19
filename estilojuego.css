@@ -108,7 +108,7 @@ canvas{
     width: 80vw;         /* ocupa gran parte del ancho de la pantalla */
     max-width: 800px;    /* máximo ancho */
     padding: 40px 20px;
-    display: block;
+    display: none;
     flex-direction: column;  /* apilar contenido verticalmente */
     align-items: center;     /* centrar horizontal */
     justify-content: center; /* centrar vertical dentro del cuadro */
@@ -187,7 +187,7 @@ img.salir {
     width: 80vw;         /* ocupa gran parte del ancho de la pantalla */
     max-width: 800px;    /* máximo ancho */
     padding: 40px 20px;
-    display: block;
+    display: none;
     flex-direction: column;  /* apilar contenido verticalmente */
     align-items: center;     /* centrar horizontal */
     justify-content: center; /* centrar vertical dentro del cuadro */

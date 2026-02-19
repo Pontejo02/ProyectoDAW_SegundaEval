@@ -590,6 +590,7 @@ $idUsuario = $_SESSION["idUsuario"];
 		//vida
 		
 		function restarVidas(){
+			if (puntuacionGuardada) return;
 			if (pel.y + pel.radius > canvas.height) {
 		        vidasTotales--;
 		        if (vidasTotales === 2) vida3.style.display = "none";
@@ -706,6 +707,7 @@ $idUsuario = $_SESSION["idUsuario"];
 		    tiempoFinal.textContent = reloj.textContent;
 		}
 		function comprobarVictoria() {
+			if (puntuacionGuardada) return;
 		    let ladrillosRestantes = 0;
 
 		    for (let c = 0; c < numeroLadrillosColumnas; c++) {
@@ -754,10 +756,10 @@ $idUsuario = $_SESSION["idUsuario"];
 			movimientoBarra();
 			restarVidas();
 			//reiniciarPartida();
-			comprobarVictoria();
 			dibujarPowerUps();
 			moverPowerUps();
 			detectarPowerUpBarra();
+			comprobarVictoria();
 			window.requestAnimationFrame(pintar);
 		};
 		pintar();
