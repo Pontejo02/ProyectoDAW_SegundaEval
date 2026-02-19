@@ -1,5 +1,7 @@
 <?php session_start();
 $usuario = $_SESSION["usuario"];
+$idusuario = $_SESSION["idUsuario"];
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,30 +27,34 @@ $usuario = $_SESSION["usuario"];
     </div>
 </header>
 
+<div class="fila">
+    <div id="rectBienv">
+        <h2 id="bienvenidaU" class="centrar">¡Bienvenido <?php echo $usuario;?>!</h2>
+    </div>
+    <div class="columnaAjustes">
+    <h2 class="centrar">Ajustes cuenta</h2>
 
-<div id="rectBienv">
-    <h2 class="centrar">¡Bienvenido <?php echo $usuario;?>!</h2>
-</div>
-<h2 class="centrar">Ajustes cuenta</h2>
-<div class="contenedor-botones">
-    <!-- Caja oculta para cambiar nombre -->
-    <div id="cambiarNombreBox">
-    <button class="boton" onclick="mostrarCambioNombre()">Cambiar nombre de usuario</button>    
-    <form action="cambiarNombre.php" method="POST">
-        <input type="text" name="nuevoNombre" placeholder="Nuevo nombre de usuario" required>
+    <button class="boton" onclick="mostrarCambioNombre()">Cambiar nombre de usuario</button>
+
+    <form id="cambiarNombre" action="usuario/cambioNomU.php" method="POST">
+        <img id="cerrarInv" src="./media/xInversa.png" alt="icono salir">
+        <input type="text" name="nuevoNombre" placeholder="@nuevoNombre" required>
         <button class="boton" type="submit">Guardar</button>
     </form>
-    </div>
-    <button class="boton" onclick="confirmarEliminacion()">Eliminar esta cuenta</button>
-<script>
-    function confirmarEliminacion() {
-        if (confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")) {
-            window.location.href = "eliminarCuenta.php";
+
+    <button class="boton" id="btnEliminar" onclick="confirmarEliminacion()">Eliminar esta cuenta</button>
+
+
+    <script>
+        function confirmarEliminacion() {
+            if (confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")) {
+                window.location.href = "eliminarCuenta.php";
             }
-    }
-</script>
+        }
+    </script>
 </div>
 
+</div>
     <hr>
     <h2>Consultas</h2>
 <?php include "./consultas/top5.php"; ?>
@@ -58,19 +64,44 @@ $usuario = $_SESSION["usuario"];
 document.addEventListener("DOMContentLoaded", function() {
 
     const btnInicio = document.getElementById("btnInicio");
-    btnInicio.addEventListener("click", () => {
-        window.location.href = "index.php";
-    });
+    if (btnInicio) {
+        btnInicio.addEventListener("click", () => {
+            window.location.href = "index.php";
+        });
+    }
 
     const btnLogout = document.getElementById("btnLogout");
-    btnLogout.addEventListener("click", () => {
-        window.location.href = "./usuario/cerrarSesion.php";
+    if (btnLogout) {
+        btnLogout.addEventListener("click", () => {
+            window.location.href = "./usuario/cerrarSesion.php";
+        });
+    }
+
+    const formCambiarNombre = document.getElementById("cambiarNombre");
+    const btnCambiarNombre = document.querySelector("button[onclick='mostrarCambioNombre()']");
+    const btnCerrar = document.getElementById("cerrarInv");
+
+    window.mostrarCambioNombre = function() {
+        const form = formCambiarNombre;
+        const btnEliminar = document.getElementById("btnEliminar");
+
+        if (form.style.display === "block") {
+            form.style.display = "none";
+            btnEliminar.style.display = "block"; // aparece al instante
+        } else {
+            form.style.display = "block";
+            btnEliminar.style.display = "none"; // desaparece al instante
+        }
+    };
+
+    btnCerrar.addEventListener("click", () => {
+        formCambiarNombre.style.display = "none";
+        document.getElementById("btnEliminar").style.display = "block";
     });
+
 
 });
 </script>
-
-
 
 </body>
 </html>
