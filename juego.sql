@@ -35,7 +35,7 @@ CREATE TABLE puntuaciones (
     fecha DATETIME NOT NULL,
     puntuacion INT NOT NULL,
     tiempo TIME NOT NULL,
-    idNiveles INT NOT NULL,
+    /*idNiveles INT NOT NULL,*/
     idUsuario INT NOT NULL,
     PRIMARY KEY (idPuntuacion),
     FOREIGN KEY (idUsuario) 
