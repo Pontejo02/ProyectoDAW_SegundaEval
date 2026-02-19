@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Doto';
-    src: url('fuentes/Doto-VariableFont_ROND,wght.ttf');
+    src: url('../fuentes/Doto-VariableFont_ROND,wght.ttf');
 }
 body{
     background-color:#cfdc5d;
@@ -352,16 +352,7 @@ img.salir {
     cursor: pointer;
     min-width: 300px;
 }
-@media (max-width: 600px) {
-    .contenedor-botones {
-        flex-direction: column;
-    }
-    .contenedor-botones button {
-        margin-left: 0px;
-        margin-right:0px;
-        cursor: pointer;
-    }
-} 
+
 #cambiarNombre {
     margin-top: 10px;
     position: relative;
@@ -399,3 +390,36 @@ img.salir {
         align-items: center;
     }
 }
+
+footer {
+    position: relative;
+    width: 120%;
+    height: 50px;
+    background-color: #4c370f;
+    margin-top: 100px;
+    margin-left: -20px;
+    margin-right: -20;
+    margin-bottom: -20px;
+    padding: 10px 0;
+    overflow: hidden; /* Oculta el texto cuando sale por los lados */ 
+} @media (max-width: 600px) {
+    .contenedor-botones {
+        flex-direction: column;
+    }
+    .contenedor-botones button {
+        margin-left: 0px;
+        margin-right:0px;
+        cursor: pointer;
+    }
+    .acciones {
+        flex-direction: column;
+        align-items: left;
+        justify-content: left;
+    }
+    header {
+        flex-direction: column;
+    }
+    #btnInicio {
+        width: 150px;
+    }
+} 
