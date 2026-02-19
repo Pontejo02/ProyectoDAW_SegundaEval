@@ -1,5 +1,9 @@
 <?php
-include "conexion.php";
+// top5.php
+require_once "../modelos/conexion.php";
+
+// Conectar con la base de datos
+$bd = ModeloConexion::conectar();
 
 echo "<h3 class='centrar'> TOP 5 Ranking Global</h3>";
 
@@ -14,14 +18,14 @@ ORDER BY p.puntuacion DESC
 LIMIT 5
 ";
 
-
 $res = mysqli_query($bd, $sql);
+
 echo "<div class='centrado'>";
 echo "<table class='tabla-ranking'>";
 echo "<tr>
         <th>Usuario</th>
         <th>Continente</th>
-        <th>Puntuacion</th>
+        <th>Puntuación</th>
       </tr>";
 
 while ($fila = mysqli_fetch_assoc($res)) {
@@ -34,4 +38,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
 
 echo "</table>";
 echo "</div>";
+
+// Cerrar conexión
+mysqli_close($bd);
 ?>

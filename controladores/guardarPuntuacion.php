@@ -1,7 +1,9 @@
 <?php
 session_start();
-echo "Estoy aquí";
-require_once "conexion.php";
+require_once "../modelos/conexion.php";
+
+
+$bd = ModeloConexion::conectar();
 
 if (!isset($_SESSION["idUsuario"])) {
     exit("Usuario no autenticado");
@@ -9,12 +11,17 @@ if (!isset($_SESSION["idUsuario"])) {
 
 $idUsuario = $_SESSION["idUsuario"];
 $puntuacion = $_POST["puntuacion"] ?? 0;
-$tiempo = $_POST["tiempo"] ?? "00:00:00"; // tiempo de juego
+$tiempo = $_POST["tiempo"] ?? "00:00:00";
 
 $sql = "INSERT INTO puntuaciones (fecha, puntuacion, tiempo, idUsuario)
         VALUES (NOW(), ?, ?, ?)";
 
 $stmt = $bd->prepare($sql);
+
+if (!$stmt) {
+    die("Error en la consulta: " . $bd->error);
+}
+
 $stmt->bind_param("isi", $puntuacion, $tiempo, $idUsuario);
 $stmt->execute();
 

@@ -3,7 +3,7 @@
 <head>
 	<title>Carrusel</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="stylesheet" type="text/css" href="../css/estilos.css">
 </head>
 <body>
     <div id="btnAtras"><b>←</b></div>
@@ -13,33 +13,33 @@
     <div class="carrusel-niveles">
         <div class="lista-niveles">
             <div class="nivel activo nivel-1">
-                <img src="media/europa.png" alt="">
+                <img src="../media/europa.png" alt="">
                 <p class="nombre">Nivel 1</p>
             </div>
 
             <div class="nivel nivel-2">
-                <img src="media/america.png" alt="">
+                <img src="../media/america.png" alt="">
                 <p class="nombre">Nivel 2</p>
             </div>
 
             <div class="nivel nivel-3">
-                <img src="media/Africa.png" alt="">
+                <img src="../media/Africa.png" alt="">
                 <p class="nombre">Nivel 3</p>
             </div>
 
             <div class="nivel nivel-4">
-                <img src="media/asia.png" alt="">
+                <img src="../media/asia.png" alt="">
                 <p class="nombre">Nivel 4</p>
             </div>
 
             <div class="nivel nivel-5">
-                <img src="media/oceania.png" alt="">
+                <img src="../media/oceania.png" alt="">
                 <p class="nombre">Nivel 5</p>
             </div>
         </div>
     </div>
     <div class="puntos" id="puntos"></div>
  </section>
- <script src="js/carrusel.js"></script>
+ <script src="../js/carrusel.js"></script>
 </body>
 </html>

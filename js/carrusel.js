@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnAtras = document.getElementById("btnAtras");
 
     btnAtras.addEventListener("click", () => {
-        window.location.href = "./index.php";
+        window.location.href = "/../index.php";
     });
     
     let actual = 0;

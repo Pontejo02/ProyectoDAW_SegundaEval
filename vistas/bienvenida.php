@@ -9,9 +9,9 @@ $idusuario = $_SESSION["idUsuario"];
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Usuario</title>
-<link rel="icon" href="./media/W.png" type="image/x-icon">
-<link href="./css/expUsuario.css" rel="stylesheet">
-<link href="./css/consultas.css" rel="stylesheet">
+<link rel="icon" href="../media/W.png" type="image/x-icon">
+<link href="../css/expUsuario.css" rel="stylesheet">
+<link href="../css/consultas.css" rel="stylesheet">
 <!-- Fuente de google fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,16 +35,20 @@ $idusuario = $_SESSION["idUsuario"];
     <h2 class="centrar">Ajustes cuenta</h2>
 
     <button class="boton" onclick="mostrarCambioNombre()">Cambiar nombre de usuario</button>
-    <form id="cambiarNombre" action="usuario/cambioNomU.php" method="POST">
-        <img id="cerrarInv" src="./media/xInversa.png" alt="icono salir">
+
+    <form id="cambiarNombre" action="../usuario/cambioNomU.php" method="POST">
+        <img id="cerrarInv" src="../media/xInversa.png" alt="icono salir">
         <input type="text" name="nuevoNombre" placeholder="@nuevoNombre" required>
         <button class="boton" type="submit">Guardar</button>
     </form>
+
     <button class="boton" id="btnEliminar" onclick="confirmarEliminacion()">Eliminar esta cuenta</button>
+
+
     <script>
         function confirmarEliminacion() {
             if (confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")) {
-                window.location.href = "./usuario/eliminarCuenta.php";
+                window.location.href = "../usuario/eliminarCuenta.php";
             }
         }
     </script>
@@ -52,27 +56,29 @@ $idusuario = $_SESSION["idUsuario"];
 
 </div>
     <h2 class="centrar" >Consultas</h2>
-<?php include "./consultas/top5.php"; ?>
-<?php include "./consultas/mediaPuntuaciones.php"; ?>
-<?php include "./consultas/historialPartidas.php"; ?>
+<?php include "../consultas/top5.php"; ?>
+<?php include "../consultas/mediaPuntuaciones.php"; ?>
+<?php include "../consultas/historialPartidas.php"; ?>
 
 <footer> 
     <div></div> 
 </footer>
+
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
     const btnInicio = document.getElementById("btnInicio");
     if (btnInicio) {
         btnInicio.addEventListener("click", () => {
-            window.location.href = "index.php";
+            window.location.href = "../index.php";
         });
     }
 
     const btnLogout = document.getElementById("btnLogout");
     if (btnLogout) {
         btnLogout.addEventListener("click", () => {
-            window.location.href = "./usuario/cerrarSesion.php";
+            window.location.href = "../usuario/cerrarSesion.php";
         });
     }
 
@@ -97,7 +103,10 @@ document.addEventListener("DOMContentLoaded", function() {
         formCambiarNombre.style.display = "none";
         document.getElementById("btnEliminar").style.display = "block";
     });
+
+
 });
 </script>
+
 </body>
 </html>

@@ -14,8 +14,8 @@ $idUsuario = $_SESSION["idUsuario"];
 <html>
 <head>
 	<title>Juego</title>
-	<link rel="icon" href="./media/W.png" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="estilojuego.css">
+	<link rel="icon" href="../media/W.png" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="../css/estilojuego.css">
 	<!-- Fuente de google fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,9 +27,9 @@ $idUsuario = $_SESSION["idUsuario"];
 			<div id="btnAtras"><b>←</b></div>
 			<div class="vidas">
 				<p><b>VIDAS</b></p>
-				<img id="vida1" src="./media/corazon.png">
-				<img id="vida2" src="./media/corazon.png">
-				<img id="vida3" src="./media/corazon.png">
+				<img id="vida1" src="../media/corazon.png">
+				<img id="vida2" src="../media/corazon.png">
+				<img id="vida3" src="../media/corazon.png">
 			</div>
 			<div class="puntuacion">
 				<p><b>PUNTUACION</b></p>
@@ -43,18 +43,18 @@ $idUsuario = $_SESSION["idUsuario"];
 		<canvas id="juego"></canvas>
 	</div>
 	<div id="hasPerdido">
-        <img class="salir" id="cerrar" src="./media/x.png" alt="icono de x para salir">
+        <img class="salir" id="cerrar" src="../media/x.png" alt="icono de x para salir">
         <h2>¡HAS PERDIDO!</h2>
-		<img id="skull" src="./media/skull.png" alt="una calavera">
+		<img id="skull" src="../media/skull.png" alt="una calavera">
         <div class="botones">
 	        <button id="reiniciarBtn">Reiniciar</button>
 	        <button id="volverBtn">Volver</button>
 	    </div>
     </div>
     <div id="hasGanado">
-        <img class="salir" id="cerrar2" src="./media/x.png" alt="icono de x para salir">
+        <img class="salir" id="cerrar2" src="../media/x.png" alt="icono de x para salir">
         <h2>¡HAS GANADO!</h2>
-		<img id="trofeo" src="./media/rectangulo.png" alt="trofeo">
+		<img id="trofeo" src="../media/rectangulo.png" alt="trofeo">
         <div class="estadisticas">
 	        <p>Vidas restantes: <span id="vidasFinal"></span></p>
 	        <p>Puntuación: <span id="puntosFinal"></span></p>
@@ -65,12 +65,12 @@ $idUsuario = $_SESSION["idUsuario"];
 			<button id="reiniciarBtnGanado">Reiniciar</button>
 	    </div>
     </div>
-	<img hidden id="bloques" src="./media/marron.jpeg"/>
-	<img hidden id="powerCorazon" src="./media/europa2.png">
-	<img hidden id="powerLinea" src="./media/Asia2.png">
-	<img hidden id="powerBarra" src="./media/Oceania2.png">
-	<img hidden id="powerPelotasRapidas" src="./media/Africa2.png">
-	<img hidden id="powerExplosion" src="./media/America2.png">
+	<img hidden id="bloques" src="../media/marron.jpeg"/>
+	<img hidden id="powerCorazon" src="../media/europa2.png">
+	<img hidden id="powerLinea" src="../media/Asia2.png">
+	<img hidden id="powerBarra" src="../media/Oceania2.png">
+	<img hidden id="powerPelotasRapidas" src="../media/Africa2.png">
+	<img hidden id="powerExplosion" src="../media/America2.png">
 	<script type="text/javascript">
 		const canvas =document.getElementById('juego');
 		const vida1 =document.getElementById('vida1');
@@ -138,14 +138,14 @@ $idUsuario = $_SESSION["idUsuario"];
         });
 
         volver.addEventListener("click", () => {
-	        window.location.href = "index.php";
+	        window.location.href = "../index.php";
 	    });
 	    volverBtnGanado.addEventListener("click", () => {
-	        window.location.href = "index.php";
+	        window.location.href = "../index.php";
 	    });
 
 	    btnAtras.addEventListener("click", () => {
-	        window.location.href = "index.php";
+	        window.location.href = "../index.php";
 	    });
 
 
@@ -260,7 +260,7 @@ $idUsuario = $_SESSION["idUsuario"];
 			let tiempoTexto = reloj.textContent;
 			let partes = tiempoTexto.split(":");
 			let tiempoMySQL = `00:${partes[0]}:${partes[1]}`;
-		    fetch("guardarPuntuacion.php", {
+		    fetch("../controladores/guardarPuntuacion.php", {
 		        method: "POST",
 		        headers: {
 		            "Content-Type": "application/x-www-form-urlencoded"
