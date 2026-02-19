@@ -1,9 +1,10 @@
-<?php session_start();
+<?php 
+session_start();
 
-// Si no hay idUsuario en la sesión, redirige al login
+// Si no existe idUsuario, crear usuario invitado temporal
 if (!isset($_SESSION["idUsuario"])) {
-    header("Location: index.php");
-    exit();
+    $_SESSION["usuario"] = "Usuario invitado";
+    $_SESSION["idUsuario"] = "invitado_" . uniqid();
 }
 
 $usuario = $_SESSION["usuario"];
@@ -256,12 +257,15 @@ $idUsuario = $_SESSION["idUsuario"];
 		}
 
 		function guardarPuntuacion() {
+			let tiempoTexto = reloj.textContent;
+			let partes = tiempoTexto.split(":");
+			let tiempoMySQL = `00:${partes[0]}:${partes[1]}`;
 		    fetch("guardarPuntuacion.php", {
 		        method: "POST",
 		        headers: {
 		            "Content-Type": "application/x-www-form-urlencoded"
 		        },
-		        body: "puntuacion=" + cantidadPuntos + "&idnivel=1"
+		        body: "puntuacion=" + cantidadPuntos + "&tiempo=" + tiempoMySQL
 		    })
 		    .then(res => res.text())
 		    .then(data => {

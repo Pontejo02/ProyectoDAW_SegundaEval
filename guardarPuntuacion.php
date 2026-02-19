@@ -9,13 +9,13 @@ if (!isset($_SESSION["idUsuario"])) {
 
 $idUsuario = $_SESSION["idUsuario"];
 $puntuacion = $_POST["puntuacion"] ?? 0;
-$idNivel = $_POST["idNivel"] ?? 1; // o el nivel actual
+$tiempo = $_POST["tiempo"] ?? "00:00:00"; // tiempo de juego
 
-$sql = "INSERT INTO puntuaciones (fecha, puntuacion, idNiveles, idUsuario)
+$sql = "INSERT INTO puntuaciones (fecha, puntuacion, tiempo, idUsuario)
         VALUES (NOW(), ?, ?, ?)";
 
 $stmt = $bd->prepare($sql);
-$stmt->bind_param("iii", $puntuacion, $idNivel, $idUsuario);
+$stmt->bind_param("isi", $puntuacion, $tiempo, $idUsuario);
 $stmt->execute();
 
 echo "ok";
