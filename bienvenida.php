@@ -35,16 +35,12 @@ $idusuario = $_SESSION["idUsuario"];
     <h2 class="centrar">Ajustes cuenta</h2>
 
     <button class="boton" onclick="mostrarCambioNombre()">Cambiar nombre de usuario</button>
-
     <form id="cambiarNombre" action="usuario/cambioNomU.php" method="POST">
         <img id="cerrarInv" src="./media/xInversa.png" alt="icono salir">
         <input type="text" name="nuevoNombre" placeholder="@nuevoNombre" required>
         <button class="boton" type="submit">Guardar</button>
     </form>
-
     <button class="boton" id="btnEliminar" onclick="confirmarEliminacion()">Eliminar esta cuenta</button>
-
-
     <script>
         function confirmarEliminacion() {
             if (confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")) {
@@ -55,13 +51,14 @@ $idusuario = $_SESSION["idUsuario"];
 </div>
 
 </div>
-    <hr>
-    <h2>Consultas</h2>
+    <h2 class="centrar" >Consultas</h2>
 <?php include "./consultas/top5.php"; ?>
 <?php include "./consultas/mediaPuntuaciones.php"; ?>
 <?php include "./consultas/historialPartidas.php"; ?>
 
-
+<footer> 
+    <div></div> 
+</footer>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -100,10 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
         formCambiarNombre.style.display = "none";
         document.getElementById("btnEliminar").style.display = "block";
     });
-
-
 });
 </script>
-
 </body>
 </html>
