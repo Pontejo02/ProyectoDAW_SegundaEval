@@ -1,7 +1,7 @@
 <?php
 include "conexion.php";
 
-echo "<h3> TOP 5 Ranking Global</h3>";
+echo "<h3 class='centrar'> TOP 5 Ranking Global</h3>";
 
 $sql = "
 SELECT 
@@ -16,7 +16,7 @@ LIMIT 5
 
 
 $res = mysqli_query($bd, $sql);
-
+echo "<div class='centrado'>";
 echo "<table class='tabla-ranking'>";
 echo "<tr>
         <th>Usuario</th>
@@ -33,4 +33,5 @@ while ($fila = mysqli_fetch_assoc($res)) {
 }
 
 echo "</table>";
+echo "</div>";
 ?>
