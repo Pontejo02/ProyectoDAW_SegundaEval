@@ -1,12 +1,12 @@
 <?php
 $idusuario= $_SESSION["idUsuario"];
-echo "<h3>📊 Historial de Partidas</h3>";
+echo "<h3 class='centrar'>Historial de partidas</h3>";
 
 $sql2 = "
 SELECT * from puntuaciones where idUsuario=$idusuario";
 
 $res2 = mysqli_query($bd, $sql2);
-
+echo "<div class='centrado'>";
 echo "<table class='tabla-ranking'>";
 echo "<tr>
         <th>Fecha</th>
@@ -23,4 +23,5 @@ while ($fila = mysqli_fetch_assoc($res2)) {
 }
 
 echo "</table>";
+echo "</div>";
 ?>
