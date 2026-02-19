@@ -48,7 +48,7 @@ $idusuario = $_SESSION["idUsuario"];
     <script>
         function confirmarEliminacion() {
             if (confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")) {
-                window.location.href = "eliminarCuenta.php";
+                window.location.href = "./usuario/eliminarCuenta.php";
             }
         }
     </script>
@@ -59,6 +59,8 @@ $idusuario = $_SESSION["idUsuario"];
     <h2>Consultas</h2>
 <?php include "./consultas/top5.php"; ?>
 <?php include "./consultas/mediaPuntuaciones.php"; ?>
+<?php include "./consultas/historialPartidas.php"; ?>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {

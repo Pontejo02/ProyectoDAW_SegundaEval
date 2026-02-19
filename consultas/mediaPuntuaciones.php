@@ -1,28 +1,33 @@
 <?php
-echo "<h3>📊 Media de puntuaciones por nivel</h3>";
+$idusuario= $_SESSION["idUsuario"];
+echo "<h3>📊 Media de puntuaciones por usuario</h3>";
 
 $sql2 = "
 SELECT 
-    n.nombreNivel,
-    AVG(p.puntuacion) AS media
-FROM niveles n
-LEFT JOIN puntuaciones p ON n.idNiveles = p.idNiveles
-GROUP BY n.idNiveles
-ORDER BY n.idNiveles;
+    n.nombreUsuario,
+    AVG(p.puntuacion) AS mediap,
+    AVG(p.tiempo) AS mediat
+FROM usuarios n
+LEFT JOIN puntuaciones p ON n.idUsuario = p.idUsuario
+WHERE n.idUsuario = $idusuario
+GROUP BY n.idUsuario
 ";
+
 
 $res2 = mysqli_query($bd, $sql2);
 
-echo "<table class='tabla-consultas'>";
+echo "<table class='tabla-ranking'>";
 echo "<tr>
-        <th>Nivel</th>
+        <th>Usuario</th>
         <th>Media de puntuación</th>
+        <th>Media de tiempo</th>
       </tr>";
 
 while ($fila = mysqli_fetch_assoc($res2)) {
     echo "<tr>";
-    echo "<td>".$fila['nombreNivel']."</td>";
-    echo "<td>".round($fila['media'], 2)."</td>";
+    echo "<td>".$fila['nombreUsuario']."</td>";
+    echo "<td>".$fila['mediap']."</td>";
+    echo "<td>".$fila['mediat']."</td>";
     echo "</tr>";
 }
 

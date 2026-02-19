@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     $sql = "UPDATE usuarios SET nombreUsuario = ? WHERE idUsuario = ?";
-    $stmt = $conn->prepare($sql);
+    $stmt = $bd->prepare($sql);
     $stmt->bind_param("si", $nuevoNombre, $idUsuario);
 
     if ($stmt->execute()) {
